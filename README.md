@@ -7,10 +7,12 @@
 1.优化wordpress效率低下的问题（目前博主文章数量大概10万+）
 2.让群里面初级Java朋友们更快上手
 
-#### 软件架构
-> --JWordpress（父工程）
-> ----jwordpress-admin（后台模块）
-> ----jworpdress-web（前台模块）
+#### 系统模块
+
+| 模块         | 释义                      |
+| ---------- | ----------------------- |
+|jwordpress-admin | 后台模块 |
+| jworpdress-web | 前台模块               |
 
 
 #### 安装教程
