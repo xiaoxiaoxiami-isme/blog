@@ -8,9 +8,9 @@
 2.让群里面初级Java朋友们更快上手
 
 #### 软件架构
---JWordpress（父工程）
-----jwordpress-admin（后台模块）
-----jworpdress-web（前台模块）
+> --JWordpress（父工程）
+> ----jwordpress-admin（后台模块）
+> ----jworpdress-web（前台模块）
 
 
 #### 安装教程
