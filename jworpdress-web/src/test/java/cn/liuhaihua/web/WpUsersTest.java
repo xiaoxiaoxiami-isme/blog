@@ -36,8 +36,15 @@ import cn.liuhaihua.web.service.WpUsersService;
 public class WpUsersTest extends BaseTest{
 	@Autowired
 	private WpUsersService wpUsersService;
+	/**
+	 * @Title: getUserDetail
+	 * @Description: 测试获取用户信息方法
+	 * @param     参数
+	 * @return void    返回类型
+	 * @throws
+	 */
 	@Test
-    public void syncMjOrder() {
+    public void getUserDetail() {
 		WpUsers user =wpUsersService.getUserDetail(1l);
 		Assert.assertEquals("Harries", user.getDisplayName());
     }
