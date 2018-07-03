@@ -48,7 +48,7 @@ public class RedisConfiguration {
 	 */
 	@Bean
 	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-		RedisTemplate<String, Object> template = new RedisTemplate<>();
+		RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
 		template.setConnectionFactory(factory);
 		template.setHashValueSerializer(new JdkSerializationRedisSerializer());
 		template.setKeySerializer(new StringRedisSerializer());
@@ -66,7 +66,7 @@ public class RedisConfiguration {
 	 */
 	@Bean
 	public RedisTemplate<String, Long> createTemplate(RedisConnectionFactory factory) {
-		final RedisTemplate<String, Long> redisTemplate = new RedisTemplate<>();
+		final RedisTemplate<String, Long> redisTemplate = new RedisTemplate<String, Long>();
 		redisTemplate.setConnectionFactory(factory);
 		redisTemplate.setHashValueSerializer(new GenericToStringSerializer<>(Long.class));
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
