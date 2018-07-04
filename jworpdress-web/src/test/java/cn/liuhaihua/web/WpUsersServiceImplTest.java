@@ -23,6 +23,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.taobao.stresstester.StressTestUtils;
+import com.taobao.stresstester.core.StressResult;
+import com.taobao.stresstester.core.StressTask;
+
 import cn.liuhaihua.web.model.WpUsers;
 import cn.liuhaihua.web.service.WpUsersService;
 
@@ -48,4 +52,24 @@ public class WpUsersServiceImplTest extends BaseTest{
 		WpUsers user =wpUsersService.getUserDetail(1l);
 		Assert.assertEquals("Harries", user.getDisplayName());
     }
+	/**
+	 * @Title: PressTest
+	 * @Description: 压力测试，测试一下获取用户信息的方法的qps
+	 * @param     参数
+	 * @return void    返回类型
+	 * @throws
+	 */
+	@Test
+	public  void PressTest(){
+		 int concurrencyLevel =100;//并发数
+		 int totalRequest = 1000;//总请求数
+		 StressResult result = StressTestUtils.test(concurrencyLevel, totalRequest, new StressTask() {
+			@Override
+			public Object doTask() throws Exception {
+				getUserDetail();
+				return "";
+			}
+		 });
+		 System.out.println(StressTestUtils.format(result));
+	}
 }
