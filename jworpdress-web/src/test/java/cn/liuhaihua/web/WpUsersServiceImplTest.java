@@ -33,7 +33,7 @@ import cn.liuhaihua.web.service.WpUsersService;
  * @date 2018年6月29日
  *
  */
-public class WpUsersTest extends BaseTest{
+public class WpUsersServiceImplTest extends BaseTest{
 	@Autowired
 	private WpUsersService wpUsersService;
 	/**
