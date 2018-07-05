@@ -19,6 +19,7 @@
  */
 package cn.liuhaihua.web.service;
 
+import cn.liuhaihua.web.exception.ServiceException;
 import cn.liuhaihua.web.model.WpUsers;
 
 /**
@@ -37,5 +38,5 @@ public interface WpUsersService {
 	 * @return WpUsers    返回类型
 	 * @throws
 	 */
-	public WpUsers getUserDetail(Long id) ;
+	public WpUsers getUserDetail(Long id) throws ServiceException;
 }

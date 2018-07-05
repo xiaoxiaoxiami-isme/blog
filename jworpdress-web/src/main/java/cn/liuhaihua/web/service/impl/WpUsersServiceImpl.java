@@ -22,6 +22,7 @@ package cn.liuhaihua.web.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.liuhaihua.web.exception.ServiceException;
 import cn.liuhaihua.web.mapper.WpUsersMapper;
 import cn.liuhaihua.web.model.WpUsers;
 import cn.liuhaihua.web.service.WpUsersService;
@@ -43,11 +44,15 @@ public class WpUsersServiceImpl implements WpUsersService{
 	 * @see cn.liuhaihua.web.service.WpUsersService#getUserDetail(java.lang.Long)
 	 */
 	@Override
-	public WpUsers getUserDetail(Long id) {
-		WpUsers record = new WpUsers();
-		record.setId(id);
-		WpUsers wpUsers = wpUsersMapper.selectOne(record);
-		return wpUsers;
+	public WpUsers getUserDetail(Long id)  throws ServiceException{
+		try{
+			WpUsers record = new WpUsers();
+			record.setId(id);
+			WpUsers wpUsers = wpUsersMapper.selectOne(record);
+			return wpUsers;
+		}catch(Exception e){
+			throw new ServiceException("查询用户信息失败");
+		}
 	}
 
 }
