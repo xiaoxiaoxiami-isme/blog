@@ -17,39 +17,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web;
+package cn.liuhaihua.web.vo;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import java.util.List;
 
-import cn.liuhaihua.web.mapper.BaseMapper;
+import javax.persistence.Transient;
+
+import lombok.Data;
 
 /**
- * @ClassName: JWordpressWebApplication
- * @Description: Springboot应用程序启动类
+ * @ClassName: TermsVO
+ * @Description: 展示分类和标签信息
  * @author Liuhaihua
- * @date 2018年6月26日
+ * @date 2018年7月27日
  *
  */
-@SpringBootApplication
-@ServletComponentScan
-@EnableTransactionManagement
-@MapperScan(basePackages = "cn.liuhaihua.web.*", markerInterface = BaseMapper.class)
-public class JWordpressWebApplication {
-
-	/**
-	 * @Title: main
-	 * @Description: main启动方法
-	 * @param @param args  
-	 * @return void    
-	 * @throws
-	 */
-	public static void main(String[] args) {
-		 SpringApplication.run(JWordpressWebApplication.class, args);
-	     System.out.println("JWordpressWebApplication启动成功");
-	}
-
+@Data
+public class TermsVO {
+	private  String termTaxonomyId;
+	private  String termId;
+	private String count;
+	private String parent;
+	private String name;
+	@Transient
+	private List<TermsVO>  child;
 }

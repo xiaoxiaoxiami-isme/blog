@@ -19,37 +19,36 @@
  */
 package cn.liuhaihua.web;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import java.util.List;
 
-import cn.liuhaihua.web.mapper.BaseMapper;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import cn.liuhaihua.web.service.WpTermsService;
+import cn.liuhaihua.web.util.FastJsonUtil;
+import cn.liuhaihua.web.vo.TermsVO;
 
 /**
- * @ClassName: JWordpressWebApplication
- * @Description: Springboot应用程序启动类
+ * @ClassName: WpTemsServiceImplTest
+ * @Description: 用户测试类
  * @author Liuhaihua
- * @date 2018年6月26日
+ * @date 2018年6月29日
  *
  */
-@SpringBootApplication
-@ServletComponentScan
-@EnableTransactionManagement
-@MapperScan(basePackages = "cn.liuhaihua.web.*", markerInterface = BaseMapper.class)
-public class JWordpressWebApplication {
-
+public class WpTemsServiceImplTest extends BaseTest{
+	@Autowired
+	private WpTermsService wpTermsService;
 	/**
-	 * @Title: main
-	 * @Description: main启动方法
-	 * @param @param args  
-	 * @return void    
+	 * @Title: getUserDetail
+	 * @Description: 测试获取用户信息方法
+	 * @param     参数
+	 * @return void    返回类型
 	 * @throws
 	 */
-	public static void main(String[] args) {
-		 SpringApplication.run(JWordpressWebApplication.class, args);
-	     System.out.println("JWordpressWebApplication启动成功");
-	}
-
+	@Test
+    public void getUserDetail() {
+		List<TermsVO> list =wpTermsService.getNavigate();
+		System.out.println(FastJsonUtil.json2String(list));
+    }
+	
 }

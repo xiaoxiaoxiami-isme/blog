@@ -17,39 +17,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web;
+package cn.liuhaihua.web.service.impl;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import java.util.List;
 
-import cn.liuhaihua.web.mapper.BaseMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cn.liuhaihua.web.mapper.WpOptionsMapper;
+import cn.liuhaihua.web.model.WpOptions;
+import cn.liuhaihua.web.service.WpOptionsService;
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.entity.Example.Criteria;
 
 /**
- * @ClassName: JWordpressWebApplication
- * @Description: Springboot应用程序启动类
+ * @ClassName: WpOptionsServiceImpl
+ * @Description: 配置信息加载类
  * @author Liuhaihua
- * @date 2018年6月26日
+ * @date 2018年7月13日
  *
  */
-@SpringBootApplication
-@ServletComponentScan
-@EnableTransactionManagement
-@MapperScan(basePackages = "cn.liuhaihua.web.*", markerInterface = BaseMapper.class)
-public class JWordpressWebApplication {
-
-	/**
-	 * @Title: main
-	 * @Description: main启动方法
-	 * @param @param args  
-	 * @return void    
-	 * @throws
+@Service
+public class WpOptionsServiceImpl implements WpOptionsService {
+	@Autowired
+	private WpOptionsMapper wpOptionsMapper;
+	/** 
+	 * @return
+	 * @see cn.liuhaihua.web.service.WpOptionsService#autoloadConfig()
 	 */
-	public static void main(String[] args) {
-		 SpringApplication.run(JWordpressWebApplication.class, args);
-	     System.out.println("JWordpressWebApplication启动成功");
+	@Override
+	public List<WpOptions> autoloadConfig() {
+		Example example = new Example(WpOptions.class);
+		Criteria c = example.createCriteria();
+		c.andEqualTo("autoload", "yes");
+		List<WpOptions>  list = wpOptionsMapper.selectByExample(example);
+		return list;
 	}
 
 }

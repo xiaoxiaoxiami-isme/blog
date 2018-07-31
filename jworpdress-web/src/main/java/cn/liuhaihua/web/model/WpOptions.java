@@ -17,39 +17,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web;
+package cn.liuhaihua.web.model;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import java.io.Serializable;
 
-import cn.liuhaihua.web.mapper.BaseMapper;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+
+import org.springframework.data.annotation.Id;
+
+import lombok.Data;
 
 /**
- * @ClassName: JWordpressWebApplication
- * @Description: Springboot应用程序启动类
+ * @ClassName: WpOptions
+ * @Description: 系统配置实体类
  * @author Liuhaihua
- * @date 2018年6月26日
+ * @date 2018年7月11日
  *
  */
-@SpringBootApplication
-@ServletComponentScan
-@EnableTransactionManagement
-@MapperScan(basePackages = "cn.liuhaihua.web.*", markerInterface = BaseMapper.class)
-public class JWordpressWebApplication {
-
+@Data
+@Table(name = "wp_options")
+public class WpOptions implements Serializable{
 	/**
-	 * @Title: main
-	 * @Description: main启动方法
-	 * @param @param args  
-	 * @return void    
-	 * @throws
+	 * @Fields field:field:(序列版本号)
 	 */
-	public static void main(String[] args) {
-		 SpringApplication.run(JWordpressWebApplication.class, args);
-	     System.out.println("JWordpressWebApplication启动成功");
-	}
-
+	private static final long serialVersionUID = -3424446862520471521L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long optionId;
+	/**
+	 * 属性名字，
+	 */
+	private String optionName;
+	/**
+	 * 属性值
+	 */
+	private String optionValue;
+	/**
+	 * 是否启动自动加载
+	 */
+	private String autoload;
 }

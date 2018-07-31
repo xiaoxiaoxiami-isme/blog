@@ -17,39 +17,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web;
+package cn.liuhaihua.web.service;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import java.util.List;
 
-import cn.liuhaihua.web.mapper.BaseMapper;
+import cn.liuhaihua.web.vo.TermsVO;
 
 /**
- * @ClassName: JWordpressWebApplication
- * @Description: Springboot应用程序启动类
+ * @ClassName: WpTerms
+ * @Description: 分类，标签服务类
  * @author Liuhaihua
- * @date 2018年6月26日
+ * @date 2018年7月27日
  *
  */
-@SpringBootApplication
-@ServletComponentScan
-@EnableTransactionManagement
-@MapperScan(basePackages = "cn.liuhaihua.web.*", markerInterface = BaseMapper.class)
-public class JWordpressWebApplication {
-
+public interface WpTermsService {
 	/**
-	 * @Title: main
-	 * @Description: main启动方法
-	 * @param @param args  
-	 * @return void    
+	 * @Title: getTerms
+	 * @Description: 获取terms列表
+	 * @param @param taxonomy--是标签还是分类
+	 * @param @return    参数
+	 * @return List<TermsVO>    返回类型
 	 * @throws
 	 */
-	public static void main(String[] args) {
-		 SpringApplication.run(JWordpressWebApplication.class, args);
-	     System.out.println("JWordpressWebApplication启动成功");
-	}
-
+	public List<TermsVO>   getTerms(String taxonomy);
+	
+	/**
+	 * 
+	 * @Title: getNavigate
+	 * @Description: 首页分类导航栏
+	 * @param @return    参数
+	 * @return List<TermsVO>    返回类型
+	 * @throws
+	 */
+	public List<TermsVO>   getNavigate();
 }

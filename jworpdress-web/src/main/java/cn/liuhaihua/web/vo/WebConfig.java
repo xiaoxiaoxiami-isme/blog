@@ -17,39 +17,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web;
+package cn.liuhaihua.web.vo;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import cn.liuhaihua.web.mapper.BaseMapper;
+import lombok.Data;
 
 /**
- * @ClassName: JWordpressWebApplication
- * @Description: Springboot应用程序启动类
+ * @ClassName: WebConfig
+ * @Description: 网站相关配置参数
  * @author Liuhaihua
- * @date 2018年6月26日
+ * @date 2018年7月24日
  *
  */
-@SpringBootApplication
-@ServletComponentScan
-@EnableTransactionManagement
-@MapperScan(basePackages = "cn.liuhaihua.web.*", markerInterface = BaseMapper.class)
-public class JWordpressWebApplication {
-
+@Data
+public class WebConfig {
 	/**
-	 * @Title: main
-	 * @Description: main启动方法
-	 * @param @param args  
-	 * @return void    
-	 * @throws
+	 * 网站名字
 	 */
-	public static void main(String[] args) {
-		 SpringApplication.run(JWordpressWebApplication.class, args);
-	     System.out.println("JWordpressWebApplication启动成功");
-	}
-
+	private String siteName;
+	/**
+	 * 网站关键字
+	 */
+	private String homeKeywords;
+	/**
+	 * 网站描述
+	 */
+	private String homeDesc;
+	/**
+	 * 网站地址
+	 */
+	private String siteUrl;
+	/**
+	 * 作者姓名
+	 */
+	private String authorName;
+	/**
+	 * 作者邮箱
+	 */
+	private String authorEmail;
 }

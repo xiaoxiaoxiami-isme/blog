@@ -19,6 +19,11 @@
  */
 package cn.liuhaihua.web.config;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +31,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+
+import cn.liuhaihua.web.model.WpOptions;
+import cn.liuhaihua.web.service.WpOptionsService;
+import cn.liuhaihua.web.util.RedisConstant;
 
 /**
  * @ClassName: CacheInit
@@ -40,6 +49,8 @@ public class CacheInit implements CommandLineRunner {
 	private static final Logger log = LoggerFactory.getLogger(CacheInit.class);
 	@Autowired
 	private RedisTemplate<String,Object> redisTemplate;
+	@Autowired
+	private WpOptionsService wpOptionsService;
 	/**
 	 * @param args
 	 * @throws Exception
@@ -48,9 +59,17 @@ public class CacheInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
     	log.info(">>>>>>>>>>>>>加载缓存数据开始<<<<<<<<<<<<<<<<<<<<<<");
-    	redisTemplate.opsForValue().set("test", "test");
-    	Object test =redisTemplate.opsForValue().get("test");
-    	log.info("取出缓存数据："+test.toString());
+    	Map<String,String> map=  new HashMap<String,String>();
+    	List<WpOptions>  list =wpOptionsService.autoloadConfig();
+    	for(WpOptions wpOptions:list){
+    		if(!StringUtils.isEmpty(wpOptions.getOptionValue())){
+    			map.put(wpOptions.getOptionName(), wpOptions.getOptionValue());
+    		}
+    	}
+    	log.info("加载系统配置信息："+list.size());
+    	redisTemplate.opsForValue().set(RedisConstant.autoloadConfig, map);
+    	//Object test =redisTemplate.opsForValue().get("test");
+    	//log.info("取出缓存数据："+test.toString());
         log.info(">>>>>>>>>>>>>初始化缓存数据 结束<<<<<<<<<<<<<<<<<<<<<<");
     }
     
