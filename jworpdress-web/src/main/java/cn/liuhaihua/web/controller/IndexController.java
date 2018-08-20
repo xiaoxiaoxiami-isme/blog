@@ -64,6 +64,7 @@ public class IndexController {
         seoVO.setKeywords("IT教程，互联网资讯，创业资讯，知识问答，生活感悟，编程技术，运维管理，分布式缓存，开发框架，数据库，集成工具，投资资讯，自动化，操作系统， 虚拟化，监控软件");
         seoVO.setDescription("HARRIES BLOG™是国内领先的IT技术博客，分布式缓存博客，编程技术博客,创业指导博客,IT投资资讯博客,IT运维博客,IT教程博客，互联网资讯博客，,云");
         model.addAttribute("seoVO", seoVO);
+        
         return  new ModelAndView(TemplateConstant.INDEX_URL);
     }
 }

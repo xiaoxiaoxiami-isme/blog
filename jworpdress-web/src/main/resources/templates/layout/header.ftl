@@ -35,26 +35,26 @@
                 <li>
                     <a href="/" class="menu_a"><i class="fa fa-home"></i>首页</a>
                 </li>
-                <@zhydTag method="types">
-                    <#if types?? && types?size gt 0>
-                        <#list types as item>
-                            <#if item.nodes?exists && item.nodes?size gt 0>
+                <@customTag method="navigate">
+                    <#if navigate?? && navigate?size gt 0>
+                        <#list navigate as item>
+                            <#if item.child?exists && item.child?size gt 0>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle menu_a" data-toggle="dropdown" aria-expanded="false">
                                         <i class="${item.icon?if_exists}"></i>${item.name?if_exists} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <#list item.nodes as node>
-                                        <li><a href="/type/${node.id?c}" title="点击查看《${node.name?if_exists}》的文章">${node.name?if_exists}</a></li>
+                                        <#list item.child as node>
+                                        <li><a href="/type/${node.termId?if_exists}" title="点击查看《${node.name?if_exists}》的文章">${node.name?if_exists}</a></li>
                                         </#list>
                                     </ul>
                                 </li>
                             <#else>
-                                <li><a href="/type/${item.id?c}" class="menu_a"><i class="${item.icon?if_exists}"></i>${item.name?if_exists}</a></li>
+                                <li><a href="/type/${item.termId?if_exists}" class="menu_a"><i class="${item.icon?if_exists}"></i>${item.name?if_exists}</a></li>
                             </#if>
                         </#list>
                     </#if>
-                </@zhydTag>
+                </@customTag>
                 <li><a href="/guestbook" class="menu_a"><i class="fa fa-comments-o"></i>留言板</a></li>
                 <li><span class="pull-right nav-search main-search" data-toggle="modal" data-target=".nav-search-box"><i class="fa fa-search"></i></span></li>
             </ul>
