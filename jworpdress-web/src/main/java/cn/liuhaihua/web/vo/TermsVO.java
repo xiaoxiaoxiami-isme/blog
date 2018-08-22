@@ -39,6 +39,7 @@ public class TermsVO {
 	private String count;
 	private String parent;
 	private String name;
+	private String taxonomy;
 	@Transient
 	private List<TermsVO>  child;
 }

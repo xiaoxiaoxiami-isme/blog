@@ -50,11 +50,11 @@ public class WpPostsServiceImplTest extends BaseTest{
     public void getPostListByPage() {
 		PostParam postParam  =  new PostParam();
 		PageInfo<WpPosts> page =wpPostsService.getPostListByPage(postParam);
-		System.out.println("分页大小:"+page.getList().size()+"|"+FastJsonUtil.json2String(page.getList()));
+		System.out.println("分页大小:"+page.getTotal()+"|"+FastJsonUtil.json2String(page.getList()));
 		
 		postParam.setPageNum(2);
 		PageInfo<WpPosts> page1 =wpPostsService.getPostListByPage(postParam);
-		System.out.println("分页大小:"+page1.getList().size()+"|"+FastJsonUtil.json2String(page1.getList()));
+		System.out.println("分页大小:"+page.getTotal()+"|"+FastJsonUtil.json2String(page1.getList()));
 	}
 	
 }

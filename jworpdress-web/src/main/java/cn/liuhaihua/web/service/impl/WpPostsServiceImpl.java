@@ -22,6 +22,7 @@ package cn.liuhaihua.web.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -63,8 +64,8 @@ public class WpPostsServiceImpl implements WpPostsService {
 		WpPosts   wpPosts =  new WpPosts();
 		wpPosts.setPostType(PostConstant.POSTTYPE_POST);
 		wpPosts.setPostStatus(PostConstant.POSTSTATUS_PUBLISH);
-		PageInfo<WpPosts>   page =(PageInfo<WpPosts>) wpPostsMapper.select(wpPosts);
-		return page;
+		Page<WpPosts>   page =(Page<WpPosts>) wpPostsMapper.select(wpPosts);
+		return page.toPageInfo();
 	}
 
 }

@@ -17,40 +17,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web;
+package cn.liuhaihua.web.vo;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import java.util.List;
 
-import cn.liuhaihua.web.mapper.BaseMapper;
+import cn.liuhaihua.web.model.WpPosts;
+import cn.liuhaihua.web.util.HtmlFilterUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
- * @ClassName: JWordpressWebApplication
- * @Description: Springboot应用程序启动类
+ * @ClassName: PostVO
+ * @Description: 文章展示VO类
  * @author Liuhaihua
- * @date 2018年6月26日
+ * @date 2018年8月22日
  *
  */
-@SpringBootApplication
-@ServletComponentScan
-@EnableTransactionManagement
-@MapperScan(basePackages = "cn.liuhaihua.web.*", markerInterface = BaseMapper.class)
-public class JWordpressWebApplication {
-
+@Data
+@EqualsAndHashCode(callSuper=false)
+public class PostVO  extends WpPosts {
+	private  List<TermsVO>  tagList;
+	private  List<TermsVO>   categoryList;
 	/**
-	 * @Title: main
-	 * @Description: main启动方法
-	 * @param @param args  
-	 * @return void    
-	 * @throws
+	 * 文章摘要
 	 */
-	public static void main(String[] args) {
-		 SpringApplication.run(JWordpressWebApplication.class, args);
-	     System.out.println("JWordpressWebApplication启动成功");
-	     
+	public String getPostExcerpt(){
+		return HtmlFilterUtil.delHTMLTag(getPostContent()).substring(0, 50)+"...";
 	}
-
 }

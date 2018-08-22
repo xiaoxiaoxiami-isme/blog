@@ -37,27 +37,27 @@
                 <#list page.list as item>
                     <article class="fade-in">
                         <figure class="thumbnail">
-                            <a href="${config.siteUrl}/article/${item.id?c}">
+                            <a href="${config.siteUrl}/archives/${item.id?c}">
                                 <#if item.coverImage?exists && (item.coverImage?length > 7)>
-                                    <img width="150" height="150" data-original="${config.qiuniuBasePath}${item.coverImage}-img_150x150" class="img-responsive lazy-img" alt="${item.title?if_exists}">
+                                    <img width="150" height="150" data-original="${config.qiuniuBasePath}${item.coverImage}-img_150x150" class="img-responsive lazy-img" alt="${item.postTitle?if_exists}">
                                 <#else>
-                                    <img width="150" height="150" data-original="${config.staticWebSite}/img/user/11.jpg" class="img-responsive lazy-img" alt="${item.title?if_exists}">
+                                    <img width="150" height="150" data-original="${config.siteUrl}/img/user/11.jpg" class="img-responsive lazy-img" alt="${item.postTitle?if_exists}">
                                 </#if>
                             </a>
-                            <span class="cat"><a href="${config.siteUrl}/type/${item.typeId?c}">${item.type.name}</a></span>
+                            <span class="cat"><a href="${config.siteUrl}/type/${item.typeId?if_exists}">${item.typename?if_exists}</a></span>
                         </figure>
                         <header class="entry-header">
                             <h2 class="entry-title">
-                                <a href="${config.siteUrl}/article/${item.id?c}" rel="bookmark" title="点击查看文章详情" data-toggle="tooltip" data-placement="bottom">${item.title}</a>
+                                <a href="${config.siteUrl}/archives/${item.id?c}" rel="bookmark" title="点击查看文章详情" data-toggle="tooltip" data-placement="bottom">${item.postTitle}</a>
                             </h2>
                         </header>
                         <div class="entry-content">
                             <div class="archive-content">
-                                ${item.description?if_exists}
+                                ${item.postExcerpt?if_exists}
                             </div>
                             <span class="title-l"></span>
                             <span class="entry-meta">
-                                <span class="date" title="文章发表日期" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-calendar-o fa-fw"></i>${item.createTime?string('yyyy-MM-dd')}</span>
+                                <span class="date" title="文章发表日期" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-calendar-o fa-fw"></i>${item.postDate?string('yyyy-MM-dd')}</span>
                                 <span class="views" title="文章阅读次数" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-eye fa-fw"></i>浏览(${item.lookCount!(0)})</span>
                                 <span class="comment" title="文章评论次数" data-toggle="tooltip" data-placement="bottom">
                                     <a href="${config.siteUrl}/article/${item.id?c}#comment-box" rel="external nofollow">
