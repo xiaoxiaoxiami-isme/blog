@@ -24,10 +24,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.pagehelper.PageInfo;
 
-import cn.liuhaihua.web.model.WpPosts;
 import cn.liuhaihua.web.service.WpPostsService;
 import cn.liuhaihua.web.util.FastJsonUtil;
 import cn.liuhaihua.web.vo.PostParam;
+import cn.liuhaihua.web.vo.PostVO;
 
 /**
  * @ClassName: WpPostsServiceImplTest
@@ -49,11 +49,11 @@ public class WpPostsServiceImplTest extends BaseTest{
 	@Test
     public void getPostListByPage() {
 		PostParam postParam  =  new PostParam();
-		PageInfo<WpPosts> page =wpPostsService.getPostListByPage(postParam);
+		PageInfo<PostVO> page =wpPostsService.getPostListByPage(postParam);
 		System.out.println("分页大小:"+page.getTotal()+"|"+FastJsonUtil.json2String(page.getList()));
 		
 		postParam.setPageNum(2);
-		PageInfo<WpPosts> page1 =wpPostsService.getPostListByPage(postParam);
+		PageInfo<PostVO> page1 =wpPostsService.getPostListByPage(postParam);
 		System.out.println("分页大小:"+page.getTotal()+"|"+FastJsonUtil.json2String(page1.getList()));
 	}
 	

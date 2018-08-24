@@ -30,11 +30,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 
-import cn.liuhaihua.web.model.WpPosts;
 import cn.liuhaihua.web.service.WpPostsService;
 import cn.liuhaihua.web.util.RedisConstant;
 import cn.liuhaihua.web.util.TemplateConstant;
 import cn.liuhaihua.web.vo.PostParam;
+import cn.liuhaihua.web.vo.PostVO;
 import cn.liuhaihua.web.vo.SeoVO;
 import cn.liuhaihua.web.vo.WebConfig;
 /**
@@ -72,7 +72,7 @@ public class IndexController {
         seoVO.setDescription("HARRIES BLOG™是国内领先的IT技术博客，分布式缓存博客，编程技术博客,创业指导博客,IT投资资讯博客,IT运维博客,IT教程博客，互联网资讯博客，,云");
         model.addAttribute("seoVO", seoVO);
         PostParam postParam  =  new PostParam();  
-        PageInfo<WpPosts>  page = wpPostsService.getPostListByPage(postParam);
+        PageInfo<PostVO>  page = wpPostsService.getPostListByPage(postParam);
         model.addAttribute("page", page);
         return  new ModelAndView(TemplateConstant.INDEX_URL);
     }

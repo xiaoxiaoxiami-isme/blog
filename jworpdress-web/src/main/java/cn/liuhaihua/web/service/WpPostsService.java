@@ -22,8 +22,8 @@ package cn.liuhaihua.web.service;
 import com.github.pagehelper.PageInfo;
 
 import cn.liuhaihua.web.exception.ServiceException;
-import cn.liuhaihua.web.model.WpPosts;
 import cn.liuhaihua.web.vo.PostParam;
+import cn.liuhaihua.web.vo.PostVO;
 
 /**
  * @ClassName: WpUsersService
@@ -42,5 +42,5 @@ public interface WpPostsService {
 	 * @return Page<WpPosts>    返回类型
 	 * @throws
 	 */
-	public PageInfo<WpPosts> getPostListByPage(PostParam postParam) throws ServiceException;
+	public PageInfo<PostVO> getPostListByPage(PostParam postParam) throws ServiceException;
 }

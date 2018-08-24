@@ -19,6 +19,10 @@
  */
 package cn.liuhaihua.web.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +32,13 @@ import com.github.pagehelper.PageInfo;
 
 import cn.liuhaihua.web.exception.ServiceException;
 import cn.liuhaihua.web.mapper.WpPostsMapper;
+import cn.liuhaihua.web.mapper.WpTermsMapper;
 import cn.liuhaihua.web.model.WpPosts;
 import cn.liuhaihua.web.service.WpPostsService;
 import cn.liuhaihua.web.util.PostConstant;
 import cn.liuhaihua.web.vo.PostParam;
+import cn.liuhaihua.web.vo.PostVO;
+import cn.liuhaihua.web.vo.TermsVO;
 
 /**
  * @ClassName: WpPostsServiceImpl
@@ -44,6 +51,8 @@ import cn.liuhaihua.web.vo.PostParam;
 public class WpPostsServiceImpl implements WpPostsService {
 	@Autowired
 	private WpPostsMapper wpPostsMapper;
+	@Autowired
+	private WpTermsMapper wpTermsMapper;
 	/** 
 	 * @param postParam
 	 * @return
@@ -51,7 +60,7 @@ public class WpPostsServiceImpl implements WpPostsService {
 	 * @see cn.liuhaihua.web.service.WpPostsService#getPostListByPage(cn.liuhaihua.web.vo.PostParam)
 	 */
 	@Override
-	public PageInfo<WpPosts> getPostListByPage(PostParam postParam) throws ServiceException {
+	public PageInfo<PostVO> getPostListByPage(PostParam postParam) throws ServiceException {
 		int pageNum = postParam.getPageNum();// 起始页
 		int pageSize = postParam.getPageSize();// 每页显示条数
 		if (pageNum <= 0){
@@ -65,7 +74,29 @@ public class WpPostsServiceImpl implements WpPostsService {
 		wpPosts.setPostType(PostConstant.POSTTYPE_POST);
 		wpPosts.setPostStatus(PostConstant.POSTSTATUS_PUBLISH);
 		Page<WpPosts>   page =(Page<WpPosts>) wpPostsMapper.select(wpPosts);
-		return page.toPageInfo();
+		return processPostsList(page.toPageInfo());
+	}
+	/**
+	 * @Title: processPostsList
+	 * @Description: 处理page list增加文章的标签 分类 以及概要
+	 * @param @param page    参数
+	 * @return void    返回类型
+	 * @throws
+	 */
+	public  PageInfo<PostVO>  processPostsList(PageInfo<WpPosts>  page){
+		List<PostVO>  listpostnew = new ArrayList<PostVO>(); 
+		for(WpPosts wpPosts:page.getList()){
+			PostVO postvo =  new PostVO();
+			List<TermsVO>  termsList =	wpTermsMapper.queryTermListByObjectId(wpPosts.getId());
+			BeanUtils.copyProperties(wpPosts, postvo);
+			postvo.setTermsList(termsList);
+			listpostnew.add(postvo);
+		}
+		PageInfo<PostVO>  pagenew = new  PageInfo<PostVO>();
+		BeanUtils.copyProperties(page, pagenew);
+		pagenew.setList(listpostnew);
+		return pagenew;
+		
 	}
 
 }

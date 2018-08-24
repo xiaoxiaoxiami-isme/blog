@@ -36,12 +36,19 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class PostVO  extends WpPosts {
-	private  List<TermsVO>  tagList;
-	private  List<TermsVO>   categoryList;
+	/**
+	 * 标签和分类
+	 */
+	private  List<TermsVO>  termsList;
 	/**
 	 * 文章摘要
 	 */
 	public String getPostExcerpt(){
-		return HtmlFilterUtil.delHTMLTag(getPostContent()).substring(0, 50)+"...";
+		String delHTMLTagstr =HtmlFilterUtil.delHTMLTag(getPostContent());
+		if(delHTMLTagstr.length()>200){
+			return delHTMLTagstr.substring(0, 200)+"...";
+		}else{
+			return delHTMLTagstr+"...";
+		}
 	}
 }

@@ -52,7 +52,7 @@ public interface WpTermsMapper extends BaseMapper<TermsVO>{
 			+ " from wp_term_taxonomy  wtt LEFT JOIN  wp_terms wt  on wtt.term_id=wt.term_id "
 			+ " LEFT JOIN  wp_term_relationships  wtr  on wtt.term_taxonomy_id =wtr.term_taxonomy_id "
 			+ "where  wtr.object_id=#{objectId} ")
-	public List<TermsVO> queryTermListByObjectId(@Param("objectId") String objectId);
+	public List<TermsVO> queryTermListByObjectId(@Param("objectId") Long objectId);
 	
 	
 }
