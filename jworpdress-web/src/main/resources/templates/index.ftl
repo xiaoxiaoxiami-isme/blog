@@ -41,10 +41,16 @@
                                 <#if item.coverImage?exists && (item.coverImage?length > 7)>
                                     <img width="150" height="150" data-original="${config.qiuniuBasePath}${item.coverImage}-img_150x150" class="img-responsive lazy-img" alt="${item.postTitle?if_exists}">
                                 <#else>
-                                    <img width="150" height="150" data-original="/static/img/user/11.jpg" class="img-responsive lazy-img" alt="${item.postTitle?if_exists}">
+                                    <img width="150" height="150" src="${config.siteUrl}/img/default_article_cover.jpg" class="img-responsive lazy-img" alt="${item.postTitle?if_exists}">
                                 </#if>
                             </a>
-                            <span class="cat"><a href="${config.siteUrl}/type/${item.typeId?if_exists}">${item.typename?if_exists}</a></span>
+                              <#if item.termsList?exists && (item.termsList?size > 0)>
+                             	  <#list item.termsList as term>
+                             	      <#if term.taxonomy?exists && (term.taxonomy=='category')>
+                          				 		<span class="cat"><a href="${config.siteUrl}/type/${term.termId?if_exists}">${term.name?if_exists}</a></span>
+                          			   </#if>
+                          		  </#list>
+                             </#if>
                         </figure>
                         <header class="entry-header">
                             <h2 class="entry-title">

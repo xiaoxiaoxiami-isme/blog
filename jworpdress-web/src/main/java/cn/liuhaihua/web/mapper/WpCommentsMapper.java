@@ -17,17 +17,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web.util;
+package cn.liuhaihua.web.mapper;
+
+import cn.liuhaihua.web.model.WpComments;
 
 /**
- * @ClassName: BusinessConstants
- * @Description: 业务常量类
+ * @ClassName: WpCommentsMapper
+ * @Description: 用户mapper
  * @author Liuhaihua
- * @date 2018年7月27日
+ * @date 2018年6月29日
  *
  */
-public class BusinessConstants {
-	public static  String category ="category";
-	public static  String post_tag ="post_tag";
-	
+public interface WpCommentsMapper extends BaseMapper<WpComments>{
+
 }

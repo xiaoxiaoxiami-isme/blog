@@ -14,7 +14,7 @@
                 <div id="feed_widget">
                     <div class="feed-about">
                         <div class="about-main">
-                            <div class="about-img"><a href="${config.staticWebSite}/img/wx_300px.png" class="showImage" title="微信公众号"><img src="${config.staticWebSite}/img/wx_300px.png" alt="微信公众号"></a></div>
+                            <div class="about-img"><a href="${config.siteUrl}/img/wx_300px.png" class="showImage" title="微信公众号"><img src="${config.siteUrl}/img/wx_300px.png" alt="微信公众号"></a></div>
                             <div class="about-name">${config.siteName}</div>
                             <div class="about-the">${config.siteDesc?if_exists}</div>
                         </div>
@@ -22,11 +22,11 @@
                         <!-- 方案一：图标展示 -->
                         <ul class="widget-icon">
                             <li class="weixin auto-shake" data-container="body"
-                                data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<img src='${config.staticWebSite}/img/wx_300px.png' style='width: 130px;' alt='QR Code'>">
+                                data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<img src='${config.siteUrl}/img/wx_300px.png' style='width: 130px;' alt='QR Code'>">
                                 <a class="tag-icon" title="微信" rel="external nofollow"><i class="fa fa-weixin"></i></a>
                             </li>
                             <li class="tqq auto-shake">
-                                <a class="tag-icon" href="javascript:window.open('tencent://message/?uin=843977358&Site=www.${config.domain}&Menu=yes')" title="点击QQ联系我" target="blank" rel="external nofollow"><i class="fa fa-qq"></i></a>
+                                <a class="tag-icon" href="javascript:window.open('tencent://message/?uin=843977358&Site=www.${config.siteUrl}&Menu=yes')" title="点击QQ联系我" target="blank" rel="external nofollow"><i class="fa fa-qq"></i></a>
                             </li>
                             <li class="tsina auto-shake">
                                 <a class="tag-icon" href="http://weibo.com/211230415" title="点击查看我的微博" target="_blank" rel="external nofollow"><i class="fa fa-weibo"></i></a>
@@ -57,36 +57,36 @@
     <div class="sidebar-module">
         <h5 class="sidebar-title"><i class="fa fa-tags icon"></i><strong>文章标签</strong></h5>
         <ul class="list-unstyled list-inline">
-            <@zhydTag method="tagsList" pageSize="10">
+            <@customTag method="tagsList" pageSize="10">
                 <#if tagsList?exists && (tagsList?size > 0)>
                     <#list tagsList as item>
                         <li class="tag-li">
-                            <a class="btn btn-default btn-xs" href="${config.siteUrl}/tag/${item.id?c}" title="${item.name?if_exists}" data-toggle="tooltip" data-placement="bottom">
+                            <a class="btn btn-default btn-xs" href="${config.siteUrl}/tag/${item.termId}" title="${item.name?if_exists}" data-toggle="tooltip" data-placement="bottom">
                                 ${item.name?if_exists}
                             </a>
                         </li>
                     </#list>
                 </#if>
-            </@zhydTag>
+            </@customTag>
         </ul>
     </div>
-    <@zhydTag method="recentComments" pageSize="10">
+    <@customTag method="recentComments" pageSize="10">
         <#if recentComments?? && recentComments?size gt 0>
             <div class="sidebar-module">
                 <h5 class="sidebar-title"><i class="fa fa-comments icon"></i><strong>近期评论</strong></h5>
                 <ul class="list-unstyled list-inline comments">
                 <#list recentComments as item>
                     <li>
-                        <a href="${item.sourceUrl}#comment-${item.id?c}" title="${item.briefContent?if_exists}" rel="external nofollow" data-toggle="tooltip" data-placement="bottom">
-                            <img alt="${item.nickname?if_exists}" src="${item.avatar?if_exists}" class="avatar auto-shake" height="64" width="64" onerror="this.src='${config.staticWebSite}/img/user.png'" />
-                            <span class="comment-author">${item.nickname?if_exists}</span> ${item.briefContent?if_exists}
+                        <a href="${item.commentAuthorUrl}#comment-${item.commentId?c}" title="${item.commentContent?if_exists}" rel="external nofollow" data-toggle="tooltip" data-placement="bottom">
+                            <img alt="${item.commentAuthor?if_exists}" src="${item.avatar?if_exists}" class="avatar auto-shake" height="64" width="64" onerror="this.src='${config.siteUrl}/img/user.png'" />
+                            <span class="comment-author">${item.commentAuthor?if_exists}</span> ${item.commentContent?if_exists}
                         </a>
                     </li>
                 </#list>
                 </ul>
             </div>
         </#if>
-    </@zhydTag>
+    </@customTag>
     <div class="sidebar-module">
         <ul class="nav nav-tabs sidebar-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list"></i>近期文章</a></li>

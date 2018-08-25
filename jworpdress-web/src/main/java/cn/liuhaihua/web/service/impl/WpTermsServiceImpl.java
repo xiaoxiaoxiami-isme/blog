@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 
 import cn.liuhaihua.web.mapper.WpTermsMapper;
 import cn.liuhaihua.web.service.WpTermsService;
-import cn.liuhaihua.web.util.BusinessConstants;
+import cn.liuhaihua.web.util.TermsConstants;
 import cn.liuhaihua.web.vo.TermsVO;
 
 /**
@@ -88,7 +88,7 @@ public class WpTermsServiceImpl implements WpTermsService {
 	 */
 	@Override
 	public List<TermsVO> getNavigate() {
-		 List<TermsVO> list =this.getTerms(BusinessConstants.category);
+		 List<TermsVO> list =this.getTerms(TermsConstants.category);
 		// 最后的结果
 	    List<TermsVO> resultList = new ArrayList<TermsVO>();
     	 // 先找到所有的一级菜单

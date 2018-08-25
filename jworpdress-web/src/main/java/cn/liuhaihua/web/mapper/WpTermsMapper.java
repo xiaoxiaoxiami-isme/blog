@@ -37,7 +37,7 @@ public interface WpTermsMapper extends BaseMapper<TermsVO>{
 	 */
 	@Select(" select wtt.term_taxonomy_id as termTaxonomyId,wtt.term_id as termId,wtt.count,wtt.parent,wt.`name` "
 			+ "from wp_term_taxonomy  wtt LEFT JOIN  wp_terms wt  on wtt.term_id=wt.term_id "
-			+ "where wtt.taxonomy=#{taxonomy} ")
+			+ "where wtt.taxonomy=#{taxonomy}   ORDER BY wtt.count  desc ")
 	public List<TermsVO> queryTermListByTaxonomy(@Param("taxonomy") String taxonomy);
 	/**
 	 * @Title: queryTermListByObjectId
@@ -48,7 +48,7 @@ public interface WpTermsMapper extends BaseMapper<TermsVO>{
 	 * @return List<TermsVO>    返回类型
 	 * @throws
 	 */
-	@Select(" select wtt.term_taxonomy_id as termTaxonomyId,wtt.term_id as termId,wtt.count,wtt.parent,wt.`name` "
+	@Select(" select wtt.term_taxonomy_id as termTaxonomyId,wtt.term_id as termId,wtt.count,wtt.parent,wt.`name` ,wtt.taxonomy "
 			+ " from wp_term_taxonomy  wtt LEFT JOIN  wp_terms wt  on wtt.term_id=wt.term_id "
 			+ " LEFT JOIN  wp_term_relationships  wtr  on wtt.term_taxonomy_id =wtr.term_taxonomy_id "
 			+ "where  wtr.object_id=#{objectId} ")

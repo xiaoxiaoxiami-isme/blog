@@ -42,7 +42,7 @@
 <#macro pageBar>
     <#if page?exists && (page.pages > 1)>
     <nav>
-        <ul class="pager page-btn" data-url="${config.siteUrl}/${url?if_exists}" data-search="${(model.keywords == null || model.keywords == '')?string('false', 'true')}">
+        <ul class="pager page-btn" data-url="${config.siteUrl}/${url?if_exists}" data-search="">
             <#if page.hasPreviousPage>
             <li><a class="pointer" data-page="${page.prePage}"><i class="fa fa-angle-double-left"></i></a></li>
             </#if>

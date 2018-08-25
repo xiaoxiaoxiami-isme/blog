@@ -21,13 +21,17 @@ package cn.liuhaihua.web.tag;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import cn.liuhaihua.web.service.WpCommentsService;
 import cn.liuhaihua.web.service.WpTermsService;
+import cn.liuhaihua.web.util.TermsConstants;
+import cn.liuhaihua.web.vo.TermsVO;
 import freemarker.core.Environment;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapperBuilder;
@@ -42,6 +46,8 @@ public class CustomTagDirective implements TemplateDirectiveModel {
   
     @Autowired
     private WpTermsService wpTermsService;
+    @Autowired
+    private WpCommentsService wpCommentsService;
 
     @Override
     public void execute(Environment environment, Map map, TemplateModel[] templateModels, TemplateDirectiveBody templateDirectiveBody) throws TemplateException, IOException {
@@ -55,11 +61,24 @@ public class CustomTagDirective implements TemplateDirectiveModel {
             }
             switch (method) {
                 case "navigate":
+                	//首页导航目录
                     environment.setVariable("navigate", builder.build().wrap(wpTermsService.getNavigate()));
                     break;
                 case "tagsList":
-                    // 所有标签
-                    environment.setVariable("tagsList", builder.build().wrap(""));
+                    //截取前面30条标签
+                	List<TermsVO>  tagsList =wpTermsService.getTerms(TermsConstants.post_tag);
+                	if(tagsList.size()>30){
+                		tagsList = tagsList.subList(0,30);
+                	}
+                    environment.setVariable("tagsList", builder.build().wrap(tagsList));
+                    break;
+                case "categoryList":
+                	//截取前面30条分类
+                	List<TermsVO>  categoryList =wpTermsService.getTerms(TermsConstants.category);
+                	if(categoryList.size()>30){
+                		categoryList = categoryList.subList(0,30);
+                	}
+                    environment.setVariable("categoryList", builder.build().wrap(categoryList));
                     break;
                 case "parentResources":
                     // 所有父级资源
@@ -67,7 +86,7 @@ public class CustomTagDirective implements TemplateDirectiveModel {
                     break;
                 case "recentComments":
                     // 近期评论
-                    environment.setVariable("recentComments", builder.build().wrap(""));
+                    environment.setVariable("recentComments", builder.build().wrap(wpCommentsService.getRecentComments(pageSize)));
                     break;
                 case "siteInfo":
                     // 站点属性
