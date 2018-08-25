@@ -96,13 +96,13 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="profile">
                 <ol class="list-unstyled">
-                    <@articleTag method="recentArticles" pageSize="10">
-                        <#if recentArticles?exists && (recentArticles?size > 0)>
-                            <#list recentArticles as item>
+                    <@articleTag method="recentList" pageSize="10">
+                        <#if recentList?exists && (recentList?size > 0)>
+                            <#list recentList as item>
                                 <li>
                                     <span class="li-icon li-icon-${item_index + 1}">${item_index + 1}</span>
-                                    <a href="${config.siteUrl}/article/${item.id?c}" title="${item.title}" data-toggle="tooltip" data-placement="bottom">
-                                        ${item.title}
+                                    <a href="${config.siteUrl}/article/${item.id?c}" title="${item.postTitle}" data-toggle="tooltip" data-placement="bottom">
+                                        ${item.postTitle}
                                     </a>
                                 </li>
                             </#list>
@@ -117,8 +117,8 @@
                             <#list recommendedList as item>
                                 <li>
                                     <span class="li-icon li-icon-${item_index + 1}">${item_index + 1}</span>
-                                    <a href="${config.siteUrl}/article/${item.id?c}" title="${item.title}" data-toggle="tooltip" data-placement="bottom">
-                                        ${item.title}
+                                    <a href="${config.siteUrl}/article/${item.id?c}" title="${item.postTitle}" data-toggle="tooltip" data-placement="bottom">
+                                        ${item.postTitle}
                                     </a>
                                 </li>
                             </#list>
@@ -133,8 +133,8 @@
                             <#list randomList as item>
                                 <li>
                                     <span class="li-icon li-icon-${item_index + 1}">${item_index + 1}</span>
-                                    <a href="${config.siteUrl}/article/${item.id?c}" title="${item.title}" data-toggle="tooltip" data-placement="bottom">
-                                        ${item.title}
+                                    <a href="${config.siteUrl}/article/${item.id?c}" title="${item.postTitle}" data-toggle="tooltip" data-placement="bottom">
+                                        ${item.postTitle}
                                     </a>
                                 </li>
                             </#list>
@@ -148,15 +148,15 @@
     <div class="sidebar-module">
         <h5 class="sidebar-title"><i class="fa fa-info icon"></i><strong>网站信息</strong></h5>
         <ul class="ul-default">
-            <@zhydTag method="siteInfo">
-                <li> <i class="fa fa-file fa-fw"></i>  文章总数：${siteInfo.articleCount!(0)} 篇</li>
+            <@customTag method="siteInfo">
+                <li> <i class="fa fa-file fa-fw"></i>  文章总数：${siteInfo.postCount!(0)} 篇</li>
                 <li> <i class="fa fa-tags fa-fw"></i> 标签总数：${siteInfo.tagCount!(0)} 个</li>
-                <li> <i class="fa fa-folder-open fa-fw"></i> 分类总数：${siteInfo.typeCount!(0)} 个</li>
-                <li> <i class="fa fa-comments fa-fw"></i> 留言数量：${siteInfo.commentCount!(0)} 条</li>
+                <li> <i class="fa fa-folder-open fa-fw"></i> 分类总数：${siteInfo.categoryCount!(0)} 个</li>
+                <li> <i class="fa fa-comments fa-fw"></i> 留言数量：${siteInfo.commmentCount!(0)} 条</li>
                 <li> <i class="fa fa-users fa-fw"></i> 在线人数：<span class="online">11</span>人</li>
                 <li> <i class="fa fa-calendar fa-fw"></i> 运行天数：${siteInfo.buildSiteDate!(0)}天</li>
                 <li> <i class="fa fa-pencil-square fa-fw"></i> 最后更新：${siteInfo.recordeTime}</li>
-            </@zhydTag>
+            </@customTag>
         </ul>
     </div>
 </div>

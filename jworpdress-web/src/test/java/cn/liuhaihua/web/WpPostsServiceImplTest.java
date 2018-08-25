@@ -26,6 +26,7 @@ import com.github.pagehelper.PageInfo;
 
 import cn.liuhaihua.web.service.WpPostsService;
 import cn.liuhaihua.web.util.FastJsonUtil;
+import cn.liuhaihua.web.util.PostConstant;
 import cn.liuhaihua.web.vo.PostParam;
 import cn.liuhaihua.web.vo.PostVO;
 
@@ -50,9 +51,9 @@ public class WpPostsServiceImplTest extends BaseTest{
     public void getPostListByPage() {
 		PostParam postParam  =  new PostParam();
 		PageInfo<PostVO> page =wpPostsService.getPostListByPage(postParam);
-		System.out.println("分页大小:"+page.getTotal()+"|"+FastJsonUtil.json2String(page.getList()));
+		System.out.println("分页大小111:"+page.getTotal()+"|"+FastJsonUtil.json2String(page.getList()));
 		
-		postParam.setPageNum(2);
+		postParam.setSortType(PostConstant.SORTTYPE_COMMMENT);
 		PageInfo<PostVO> page1 =wpPostsService.getPostListByPage(postParam);
 		System.out.println("分页大小:"+page.getTotal()+"|"+FastJsonUtil.json2String(page1.getList()));
 	}

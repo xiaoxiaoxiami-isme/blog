@@ -28,7 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import cn.liuhaihua.web.model.WpOptions;
 import cn.liuhaihua.web.service.WpCommentsService;
+import cn.liuhaihua.web.service.WpOptionsService;
 import cn.liuhaihua.web.service.WpTermsService;
 import cn.liuhaihua.web.util.TermsConstants;
 import cn.liuhaihua.web.vo.TermsVO;
@@ -39,7 +41,14 @@ import freemarker.template.TemplateDirectiveBody;
 import freemarker.template.TemplateDirectiveModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModel;
-
+/**
+ * 
+ * @ClassName: CustomTagDirective
+ * @Description:自定义标签
+ * @author Liuhaihua
+ * @date 2018年8月25日
+ *
+ */
 @Component
 public class CustomTagDirective implements TemplateDirectiveModel {
     private static final String METHOD_KEY = "method";
@@ -48,6 +57,8 @@ public class CustomTagDirective implements TemplateDirectiveModel {
     private WpTermsService wpTermsService;
     @Autowired
     private WpCommentsService wpCommentsService;
+    @Autowired
+    private WpOptionsService wpOptionsService;
 
     @Override
     public void execute(Environment environment, Map map, TemplateModel[] templateModels, TemplateDirectiveBody templateDirectiveBody) throws TemplateException, IOException {
@@ -90,7 +101,7 @@ public class CustomTagDirective implements TemplateDirectiveModel {
                     break;
                 case "siteInfo":
                     // 站点属性
-                    environment.setVariable("siteInfo", builder.build().wrap(""));
+                    environment.setVariable("siteInfo", builder.build().wrap(wpOptionsService.getSiteInfo()));
                     break;
                 case "menus":
                     Integer userId = null;

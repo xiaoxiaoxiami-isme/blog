@@ -22,6 +22,7 @@ package cn.liuhaihua.web.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,8 @@ import cn.liuhaihua.web.util.PostConstant;
 import cn.liuhaihua.web.vo.PostParam;
 import cn.liuhaihua.web.vo.PostVO;
 import cn.liuhaihua.web.vo.TermsVO;
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.entity.Example.Criteria;
 
 /**
  * @ClassName: WpPostsServiceImpl
@@ -69,11 +72,28 @@ public class WpPostsServiceImpl implements WpPostsService {
 		if (pageSize <= 0) {
 			pageSize = 10;
 		}
+		
 		PageHelper.startPage(pageNum,pageSize);
-		WpPosts   wpPosts =  new WpPosts();
-		wpPosts.setPostType(PostConstant.POSTTYPE_POST);
-		wpPosts.setPostStatus(PostConstant.POSTSTATUS_PUBLISH);
-		Page<WpPosts>   page =(Page<WpPosts>) wpPostsMapper.select(wpPosts);
+//		WpPosts   wpPosts =  new WpPosts();
+//		wpPosts.setPostType(PostConstant.POSTTYPE_POST);
+//		wpPosts.setPostStatus(PostConstant.POSTSTATUS_PUBLISH);
+//		Page<WpPosts>   page =(Page<WpPosts>) wpPostsMapper.select(wpPosts);
+		Example   example =  new Example(WpPosts.class);
+		Criteria criteria = example.createCriteria();
+		criteria.andEqualTo("postType", PostConstant.POSTTYPE_POST);
+		criteria.andEqualTo("postStatus",PostConstant.POSTSTATUS_PUBLISH);
+		if(!StringUtils.isEmpty(postParam.getSortType())){
+			if(postParam.getSortType().equals(PostConstant.SORTTYPE_COMMMENT)){
+				example.setOrderByClause(" comment_count  desc  ");
+			}else if(postParam.getSortType().equals(PostConstant.SORTTYPE_DATE)){
+				example.setOrderByClause(" post_date  desc  ");
+			}else if(postParam.getSortType().equals(PostConstant.SORTTYPE_RANDOM)){
+				example.setOrderByClause("  RAND()  ");
+			}else if(postParam.getSortType().equals(PostConstant.SORTTYPE_VIEW)){
+				example.setOrderByClause(" post_date  desc  ");
+			}
+		}
+		Page<WpPosts>   page =(Page<WpPosts>) wpPostsMapper.selectByExample(example);
 		return processPostsList(page.toPageInfo());
 	}
 	/**

@@ -30,7 +30,7 @@ import cn.liuhaihua.web.vo.TermsVO;
 
 /**
  * @ClassName: WpTemsServiceImplTest
- * @Description: 用户测试类
+ * @Description: 标签测试类
  * @author Liuhaihua
  * @date 2018年6月29日
  *
@@ -39,14 +39,14 @@ public class WpTemsServiceImplTest extends BaseTest{
 	@Autowired
 	private WpTermsService wpTermsService;
 	/**
-	 * @Title: getUserDetail
-	 * @Description: 测试获取用户信息方法
+	 * @Title: getNavigate
+	 * @Description: 获取分类和标签方法
 	 * @param     参数
 	 * @return void    返回类型
 	 * @throws
 	 */
 	@Test
-    public void getUserDetail() {
+    public void getNavigate() {
 		List<TermsVO> list =wpTermsService.getNavigate();
 		System.out.println(FastJsonUtil.json2String(list));
     }

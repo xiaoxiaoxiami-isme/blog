@@ -19,14 +19,22 @@
  */
 package cn.liuhaihua.web.service.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.liuhaihua.web.mapper.WpCommentsMapper;
 import cn.liuhaihua.web.mapper.WpOptionsMapper;
+import cn.liuhaihua.web.mapper.WpPostsMapper;
+import cn.liuhaihua.web.mapper.WpTermsMapper;
 import cn.liuhaihua.web.model.WpOptions;
 import cn.liuhaihua.web.service.WpOptionsService;
+import cn.liuhaihua.web.util.DateUtil;
+import cn.liuhaihua.web.util.TermsConstants;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
 
@@ -41,6 +49,12 @@ import tk.mybatis.mapper.entity.Example.Criteria;
 public class WpOptionsServiceImpl implements WpOptionsService {
 	@Autowired
 	private WpOptionsMapper wpOptionsMapper;
+	@Autowired
+	private WpPostsMapper  wpPostsMapper;
+	@Autowired
+	private WpTermsMapper  wpTermsMapper;
+	@Autowired
+	private WpCommentsMapper wpCommentsMapper;
 	/** 
 	 * @return
 	 * @see cn.liuhaihua.web.service.WpOptionsService#autoloadConfig()
@@ -53,5 +67,25 @@ public class WpOptionsServiceImpl implements WpOptionsService {
 		List<WpOptions>  list = wpOptionsMapper.selectByExample(example);
 		return list;
 	}
+	  /**
+     * 获取网站详情
+     *
+     * @return
+     */
+    @Override
+    public Map<String, Object> getSiteInfo() {
+        Map<String, Object> map = new  HashMap<String, Object>();
+        map.put("postCount", wpPostsMapper.selectCount(null));
+        map.put("recordeTime", DateUtil.date2Str(new Date(), "yyyy年MM月dd日HH点"));
+        Date buildSiteDate = DateUtil.str2Date("2012-10-27 00:00:00", DateUtil.YYYY_MM_DD_HH_MM_SS_EN);
+        // 获取建站天数
+        map.put("buildSiteDate", DateUtil.getGapDay(buildSiteDate, new Date()));
+        int  tagCount =wpTermsMapper.queryTermListByTaxonomy(TermsConstants.post_tag).size();
+        int  categoryCount =wpTermsMapper.queryTermListByTaxonomy(TermsConstants.category).size();
+        map.put("tagCount", tagCount);
+        map.put("categoryCount", categoryCount);
+        map.put("commmentCount",  wpCommentsMapper.selectCount(null));
+        return map;
+    }
 
 }

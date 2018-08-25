@@ -67,5 +67,22 @@ public class PostConstant {
 	   * 私有
 	   */
 	  public  static String POSTSTATUS_PRIVATE="private";
+	  
+	  /**
+	   * 按文章评论
+	   */
+	  public static String SORTTYPE_COMMMENT="comment";
+	  /**
+	   * 按访问量
+	   */
+	  public static String SORTTYPE_VIEW="view";
+	  /**
+	   * 按照日期排序
+	   */
+	  public static String SORTTYPE_DATE="date";
+	  /**
+	   * 随机文章
+	   */
+	  public static String SORTTYPE_RANDOM="random";
 
 }

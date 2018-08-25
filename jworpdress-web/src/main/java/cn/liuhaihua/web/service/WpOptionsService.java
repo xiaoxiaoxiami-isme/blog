@@ -20,6 +20,7 @@
 package cn.liuhaihua.web.service;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.liuhaihua.web.model.WpOptions;
 
@@ -37,4 +38,12 @@ public interface WpOptionsService {
      * @return
      */
 	List<WpOptions> autoloadConfig();
+	/**
+	 * @Title: getSiteInfo
+	 * @Description: 获取网站需求
+	 * @param @return    参数
+	 * @return Map<String,Object>    返回类型
+	 * @throws
+	 */
+	public Map<String, Object> getSiteInfo();
 }

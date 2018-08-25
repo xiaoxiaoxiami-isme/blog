@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import cn.liuhaihua.web.tag.CustomTagDirective;
+import cn.liuhaihua.web.tag.PostTagDirective;
 /**
  * @ClassName: FreemarkerConfig
  * @Description: freemarker模板配置类
@@ -36,6 +37,8 @@ import cn.liuhaihua.web.tag.CustomTagDirective;
 public class FreemarkerConfig {
 	@Autowired
 	private CustomTagDirective customTagDirective;
+	@Autowired
+	private PostTagDirective postTagDirective;
     @Autowired  
     protected freemarker.template.Configuration configuration;  
     @Autowired  
@@ -54,6 +57,7 @@ public class FreemarkerConfig {
         try {
             //自定义标签
         	 configuration.setSharedVariable("customTag", customTagDirective);
+        	 configuration.setSharedVariable("articleTag", postTagDirective);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -36,4 +36,8 @@ public class PostParam {
 
 	//每页显示数量
 	private int  pageSize;
+	/**
+	 * 文章排序类型
+	 */
+	private String sortType;
 }

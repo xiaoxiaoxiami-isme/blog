@@ -43,4 +43,7 @@ public interface WpPostsService {
 	 * @throws
 	 */
 	public PageInfo<PostVO> getPostListByPage(PostParam postParam) throws ServiceException;
+	
+	
+	
 }
