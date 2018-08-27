@@ -42,6 +42,7 @@
 - 并发框架：Disruptor
 - 日志管理：SLF4J、Log4j
 - 工具类：Apache Commons、Jackson、Xstream、
+
 2、前端
 
 - JS框架：jQuery。
@@ -58,21 +59,21 @@
 
 #### 项目教程
 
-1.[SpringBoot静态资源的访问和配置](https://blog.gitee.com)
-2.[pagehelper分页原理如何实现的？](https://blog.gitee.com)
-3.[java递归实现导航菜单](https://blog.gitee.com)
-4.[freemarker自定义标签](https://blog.gitee.com)
-5.[springboot集成freemarker](https://blog.gitee.com)
-6.[理解和利用 WordPress 中的分类法（Taxonomies）和分类项（Terms）](https://blog.gitee.com)
-7.[咱们来聊聊并发工具类Semaphore](https://blog.gitee.com)
-8.[用栅栏（CyclicBarrier）实现高并发测试](https://blog.gitee.com)
-9.[stresstester源码分析](https://blog.gitee.com)
-10.[集成redis](https://blog.gitee.com)
-11.[集成log4j2](https://blog.gitee.com)
-12.[集成druid数据源](https://blog.gitee.com)
-13.[如何做代码单元压力测试？](https://blog.gitee.com)
-14.[单元测试代码覆盖率](https://blog.gitee.com)
-15.[如何编写单元测试](https://blog.gitee.com)
-16.[集成mybaties](https://blog.gitee.com)
-17.[项目集成springboot](https://blog.gitee.com)
-18[如何在Eclipse中如何自动添加注释和自定义注释风格](https://blog.gitee.com)
+- [SpringBoot静态资源的访问和配置](http://www.liuhaihua.cn/archives/532855.html)
+- [pagehelper分页原理如何实现的？](http://www.liuhaihua.cn/archives/531953.html)
+- [java递归实现导航菜单](http://www.liuhaihua.cn/archives/531242.html)
+- [freemarker自定义标签](http://www.liuhaihua.cn/archives/531237.html)
+- [springboot集成freemarker](http://www.liuhaihua.cn/archives/530369.html)
+- [理解和利用 WordPress 中的分类法（Taxonomies）和分类项（Terms）](http://www.liuhaihua.cn/archives/529634.html)
+- [咱们来聊聊并发工具类Semaphore](http://www.liuhaihua.cn/archives/526709.html)
+- [用栅栏（CyclicBarrier）实现高并发测试](http://www.liuhaihua.cn/archives/526509.html)
+- [stresstester源码分析](http://www.liuhaihua.cn/archives/526445.html)
+- [集成redis](http://www.liuhaihua.cn/archives/526354.html)
+- [集成log4j2](http://www.liuhaihua.cn/archives/526350.html)
+- [集成druid数据源](http://www.liuhaihua.cn/archives/526346.html)
+- [如何做代码单元压力测试？](http://www.liuhaihua.cn/archives/526220.html)
+- [单元测试代码覆盖率](http://www.liuhaihua.cn/archives/526212.html)
+- [如何编写单元测试](http://www.liuhaihua.cn/archives/526146.html)
+- [集成mybaties](http://www.liuhaihua.cn/archives/526121.html)
+- [项目集成springboot](http://www.liuhaihua.cn/archives/525963.html)
+- [如何在Eclipse中如何自动添加注释和自定义注释风格](http://www.liuhaihua.cn/archives/525179.html)
