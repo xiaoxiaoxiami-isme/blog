@@ -35,11 +35,23 @@
 4. 新建 Pull Request
 
 
-#### 码云特技
+#### 项目教程
 
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [http://git.mydoc.io/](http://git.mydoc.io/)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+[SpringBoot静态资源的访问和配置](https://blog.gitee.com)
+[pagehelper分页原理如何实现的？](https://blog.gitee.com)
+[java递归实现导航菜单](https://blog.gitee.com)
+[freemarker自定义标签](https://blog.gitee.com)
+[springboot集成freemarker](https://blog.gitee.com)
+[理解和利用 WordPress 中的分类法（Taxonomies）和分类项（Terms）](https://blog.gitee.com)
+[咱们来聊聊并发工具类Semaphore](https://blog.gitee.com)
+[用栅栏（CyclicBarrier）实现高并发测试](https://blog.gitee.com)
+[stresstester源码分析](https://blog.gitee.com)
+[集成redis](https://blog.gitee.com)
+[集成log4j2](https://blog.gitee.com)
+[集成druid数据源](https://blog.gitee.com)
+[如何做代码单元压力测试？](https://blog.gitee.com)
+[单元测试代码覆盖率](https://blog.gitee.com)
+[如何编写单元测试](https://blog.gitee.com)
+[集成mybaties](https://blog.gitee.com)
+[项目集成springboot](https://blog.gitee.com)
+[如何在Eclipse中如何自动添加注释和自定义注释风格](https://blog.gitee.com)
