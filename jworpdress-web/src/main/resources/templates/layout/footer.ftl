@@ -10,7 +10,7 @@
                 <form action="/" method="post" class="form-horizontal searchForm" id="searchForm">
                     <input type="hidden" name="pageNumber" value="1">
                     <div class="input-group bottom-line">
-                        <input type="text" class="form-control br-none" name="keywords" value="${model.keywords}" required="required" placeholder="输入搜索内容">
+                        <input type="text" class="form-control br-none" name="keywords" required="required" placeholder="输入搜索内容">
                         <span class="input-group-btn">
                         <button class="btn btn-default br-none nav-search-btn pointer" type="submit"><i class="fa fa-search"></i> 搜索</button>
                     </span>
@@ -127,23 +127,26 @@
         </div>
         <div class="col-xs-12 col-sm-4 col-md-4 text-left fade-in">
             <h4>问题交流</h4>
-            <div class="row" style="padding: 4px;padding-left: 10px;">
-                <div class="col-xs-12 col-sm-7 col-md-7" style="white-space: initial;">
-                    <span>志同道合者欢迎进QQ交流群(190886500)</span>
-                </div>
-                <div class="col-xs-12 col-sm-5 col-md-5">
-                    <a href="${config.staticWebSite}/img/qq_group.png" class="showImage" title="QQ群(190886500)二维码" rel="external nofollow">
-                        <img data-original="${config.staticWebSite}/img/qq_group.png" alt="QQ群(190886500)二维码" class="img-responsive img-rounded auto-shake lazy-img" style="width: 100px;">
-                    </a>
-                </div>
-            </div>
+		        <div class="row" style="padding: 4px;padding-left: 10px;">
+						<div class="col-xs-12 col-sm-12 col-md-12">
+						<a href="${config.siteUrl}/img/qrcode_gzh.jpg" target="_blank" class="showImage" title="[java杂记]公众号" rel="external nofollow">
+						<img data-original="${config.siteUrl}/img/qrcode_gzh.jpg" alt="[java杂记]公众号" class="img-responsive img-rounded auto-shake lazy-img" style="width: 100px; display: inline-block;" src="${config.siteUrl}/img/qrcode_gzh.jpg">
+						</a>
+						<a href="${config.siteUrl}/img/javazaji.png" target="_blank" class="showImage" title="java杂记" rel="external nofollow">
+						<img data-original="${config.siteUrl}/img/javazaji.png" alt="java杂记" class="img-responsive img-rounded auto-shake lazy-img" style="width: 100px; display: inline-block;" src="${config.siteUrl}/img/javazaji.png">
+						</a>
+						<a href="${config.siteUrl}/img/leetcode.png" class="showImage" title="leetcode刷题旅程" rel="external nofollow">
+						<img data-original="${config.siteUrl}/img/leetcode.png" alt="leetcode刷题旅程" class="img-responsive img-rounded auto-shake lazy-img" style="width: 100px; display: inline-block;" src="${config.siteUrl}/img/leetcode.png">
+						</a>
+						</div>
+				</div>
         </div>
     </div>
 </div>
 <footer class="footer">
     <div class="clear">
         <p>托管于<a href="https://promotion.aliyun.com/ntms/act/ambassador/sharetouser.html?userCode=wylo59db" target="_blank" title="阿里云-为了无法计算的价值" data-toggle="tooltip" data-placement="bottom" rel="external nofollow">阿里云</a> & <a href="https://www.qiniu.com/" target="_blank" title="七牛云-国内领先的企业级云服务商" data-toggle="tooltip" data-placement="bottom" rel="external nofollow">七牛云</a> · <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank" title="查看备案信息" data-toggle="tooltip" data-placement="bottom" rel="external nofollow">鲁ICP备17054970号-1</a></p>
-        <p>Copyright&copy;2016-${.now?string("yyyy")} ${config.siteName} · Powered by <a href="https://www.zhyd.me" title="张亚东博客，一个程序员的个人博客" data-toggle="tooltip" data-placement="right" target="_blank"><strong>张亚东</strong></a> - <a href="https://gitee.com/yadong.zhang/DBlog" title="DBlog是一款简洁美观、自适应的Java博客系统..." data-toggle="tooltip" data-placement="right" target="_blank"><strong>DBlog</strong></a>· <a href="http://tongji.baidu.com/web/welcome/ico?s=590226d2f4ffbf051442eb75f37333c9" target="_blank" title="点击查看${config.siteName}网站统计详情" data-toggle="tooltip" data-placement="right" rel="external nofollow"><i class="fa fa-bar-chart-o fa-fw fa-spin"></i>网站统计</a></p>
+        <p>Copyright&copy;2016-${.now?string("yyyy")} ${config.siteName} ·</p>
     </div>
 </footer>
 <a class="to-top" title="点击返回顶部" data-toggle="tooltip" data-placement="bottom"></a>
@@ -159,10 +162,10 @@
 <script type="text/javascript">
     var appConfig = {
         wwwPath: '${config.siteUrl}',
-        staticPath: '${config.staticWebSite}'
+        staticPath: '${config.siteUrl}'
     }
 </script>
-<script type="text/javascript" src="${config.staticWebSite}/js/wangEditor.min.js"></script>
-<script type="text/javascript" src="${config.staticWebSite}/js/zhyd.core.js"></script>
-<script type="text/javascript" src="${config.staticWebSite}/js/zhyd.js"></script>
-<script type="text/javascript" src="${config.staticWebSite}/js/zhyd.comment.js"></script>
+<script type="text/javascript" src="${config.siteUrl}/js/wangEditor.min.js"></script>
+<script type="text/javascript" src="${config.siteUrl}/js/zhyd.core.js"></script>
+<script type="text/javascript" src="${config.siteUrl}/js/zhyd.js"></script>
+<script type="text/javascript" src="${config.siteUrl}/js/zhyd.comment.js"></script>
