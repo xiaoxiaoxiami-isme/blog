@@ -16,9 +16,9 @@
 
 
 #### 效果图
-`前台效果图`
+前台效果图
 ![Ryan Miao](http://www.liuhaihua.cn/wp-content/uploads/2018/08/front-1024x566.png)
-`后台效果图`
+后台效果图
 ![Ryan Miao](http://www.liuhaihua.cn/wp-content/uploads/2018/08/admin-1024x448.png)
 
 #### 技术栈
@@ -72,3 +72,6 @@
 - [集成mybaties](http://www.liuhaihua.cn/archives/526121.html)
 - [项目集成springboot](http://www.liuhaihua.cn/archives/525963.html)
 - [如何在Eclipse中如何自动添加注释和自定义注释风格](http://www.liuhaihua.cn/archives/525179.html)
+#### 结束语
+如果大家喜欢的，可以关注我的微信公众号，我在定时在公众号上会同步本项目的最新教程。
+![Ryan Miao](http://www.liuhaihua.cn/wp-content/uploads/2018/07/888.png)
