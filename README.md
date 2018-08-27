@@ -15,17 +15,13 @@
 | jworpdress-web | 前台模块               |
 
 
-#### 安装教程
+#### 效果图
+前台效果图
+![Ryan Miao](http://www.liuhaihua.cn/wp-content/uploads/2018/08/front-1024x566.png)
+后台效果图
+![Ryan Miao](http://www.liuhaihua.cn/wp-content/uploads/2018/08/admin-1024x448.png)
 
-1. xxxx
-2. xxxx
-3. xxxx
 
-#### 使用说明
-
-1. xxxx
-2. xxxx
-3. xxxx
 
 #### 技术栈
 1、后端
