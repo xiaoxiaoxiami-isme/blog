@@ -38,6 +38,7 @@
 - 工具类：Apache Commons、Jackson、Xstream、
 
 2、前端
+> 由于我不是很会前端技术，所以界面直接借鉴DBblog的，链接地址：（https://gitee.com/jxuasea/DBlog.git）
 
 由于我不是很会前端技术，所以界面直接借鉴DBblog的，[链接地址](https://gitee.com/yadong.zhang/DBlog)
 - JS框架：jQuery。
