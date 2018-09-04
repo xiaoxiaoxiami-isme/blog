@@ -39,6 +39,7 @@
 
 2、前端
 
+由于我不是很会前端技术，所以界面直接借鉴DBblog的，[链接地址](https://gitee.com/yadong.zhang/DBlog)
 - JS框架：jQuery。
 - CSS框架：Twitter Bootstrap
 - 客户端验证：Validform。
