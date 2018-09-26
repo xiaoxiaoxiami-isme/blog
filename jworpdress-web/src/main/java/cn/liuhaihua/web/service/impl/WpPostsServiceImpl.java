@@ -22,6 +22,7 @@ package cn.liuhaihua.web.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,10 +75,6 @@ public class WpPostsServiceImpl implements WpPostsService {
 		}
 		
 		PageHelper.startPage(pageNum,pageSize);
-//		WpPosts   wpPosts =  new WpPosts();
-//		wpPosts.setPostType(PostConstant.POSTTYPE_POST);
-//		wpPosts.setPostStatus(PostConstant.POSTSTATUS_PUBLISH);
-//		Page<WpPosts>   page =(Page<WpPosts>) wpPostsMapper.select(wpPosts);
 		Example   example =  new Example(WpPosts.class);
 		Criteria criteria = example.createCriteria();
 		criteria.andEqualTo("postType", PostConstant.POSTTYPE_POST);
@@ -106,11 +103,7 @@ public class WpPostsServiceImpl implements WpPostsService {
 	public  PageInfo<PostVO>  processPostsList(PageInfo<WpPosts>  page){
 		List<PostVO>  listpostnew = new ArrayList<PostVO>(); 
 		for(WpPosts wpPosts:page.getList()){
-			PostVO postvo =  new PostVO();
-			List<TermsVO>  termsList =	wpTermsMapper.queryTermListByObjectId(wpPosts.getId());
-			BeanUtils.copyProperties(wpPosts, postvo);
-			postvo.setTermsList(termsList);
-			listpostnew.add(postvo);
+			listpostnew.add(processPost(wpPosts));
 		}
 		PageInfo<PostVO>  pagenew = new  PageInfo<PostVO>();
 		BeanUtils.copyProperties(page, pagenew);
@@ -118,5 +111,100 @@ public class WpPostsServiceImpl implements WpPostsService {
 		return pagenew;
 		
 	}
-
+	/**
+	 * @Title: processPost
+	 * @Description: 处理文章的类
+	 * @param @param wpPosts
+	 * @param @return    参数
+	 * @return PostVO    返回类型
+	 * @throws
+	 */
+	public  PostVO   processPost(WpPosts  wpPosts){
+		PostVO postvo =  new PostVO();
+		List<TermsVO>  termsList =	wpTermsMapper.queryTermListByObjectId(wpPosts.getId());
+		BeanUtils.copyProperties(wpPosts, postvo);
+		postvo.setTermsList(termsList);
+		return postvo;
+	}
+	/** 
+	 * @param postId
+	 * @return
+	 * @throws ServiceException
+	 * @see cn.liuhaihua.web.service.WpPostsService#getPostByID(java.lang.String)
+	 */
+	@Override
+	public PostVO getPostByID(Long postId) throws ServiceException {
+		WpPosts  wpPosts = wpPostsMapper.selectByPrimaryKey(postId);
+		return processPost(wpPosts);
+		
+	}
+	/** 
+	 * @param postId
+	 * @return
+	 * @throws ServiceException
+	 * @see cn.liuhaihua.web.service.WpPostsService#getPrevPost(java.lang.Long)
+	 */
+	@Override
+	public WpPosts getPrevPost(Long postId) throws ServiceException {
+		Example   example =  new Example(WpPosts.class);
+		Criteria criteria = example.createCriteria();
+		criteria.andEqualTo("postType", PostConstant.POSTTYPE_POST);
+		criteria.andEqualTo("postStatus",PostConstant.POSTSTATUS_PUBLISH);
+		criteria.andLessThan("id", postId);
+		example.setOrderByClause(" id  desc  limit 1  ");
+		List<WpPosts>   list = wpPostsMapper.selectByExample(example);
+		if(null!=list&&list.size()>0){
+			return list.get(0);
+		}
+		return null;
+	}
+	/**
+	 * @param postId
+	 * @return
+	 * @throws ServiceException
+	 * @see cn.liuhaihua.web.service.WpPostsService#getNextPost(java.lang.Long)
+	 */
+	@Override
+	public WpPosts getNextPost(Long postId) throws ServiceException {
+		Example   example =  new Example(WpPosts.class);
+		Criteria criteria = example.createCriteria();
+		criteria.andEqualTo("postType", PostConstant.POSTTYPE_POST);
+		criteria.andEqualTo("postStatus",PostConstant.POSTSTATUS_PUBLISH);
+		criteria.andGreaterThan("id", postId);
+		example.setOrderByClause(" id  asc  limit 1  ");
+		List<WpPosts>   list = wpPostsMapper.selectByExample(example);
+		if(null!=list&&list.size()>0){
+			return list.get(0);
+		}
+		return null;
+	}
+	/** 
+	 * @param postId
+	 * @return
+	 * @throws ServiceException
+	 * @see cn.liuhaihua.web.service.WpPostsService#getRelatePost(java.lang.Long)
+	 */
+	@Override
+	public List<WpPosts> getRelatePost(Long postId) throws ServiceException {
+		List<TermsVO>  termsList =	wpTermsMapper.queryTermListByObjectId(postId);
+		String  termsIds ="";
+		for(TermsVO v:termsList){
+			termsIds= termsIds+","+v.getTermTaxonomyId();
+		}
+		if(StringUtils.isEmpty(termsIds)){
+			return null;
+		}else{
+			termsIds = termsIds.substring(1,termsIds.length());
+			List<Long>  postIdsList =wpTermsMapper.queryRelatePostByTerms(termsIds, 4);
+			Example   example =  new Example(WpPosts.class);
+			Criteria criteria = example.createCriteria();
+			criteria.andEqualTo("postType", PostConstant.POSTTYPE_POST);
+			criteria.andEqualTo("postStatus",PostConstant.POSTSTATUS_PUBLISH);
+			criteria.andIn("id", postIdsList);
+			List<WpPosts>   list = wpPostsMapper.selectByExample(example);
+			return list;
+		}
+		
+	}
+	
 }

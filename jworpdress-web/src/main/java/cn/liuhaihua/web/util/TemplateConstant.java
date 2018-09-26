@@ -31,5 +31,13 @@ public class TemplateConstant {
 	 * 首页模板名字
 	 */
 	 public static final String INDEX_URL = "index";
+	 /**
+	  * post
+	  */
+	 public static final String POST_URL = "post";
+	 /**
+	  * 404
+	  */
+	 public static final String ERROR_404 = "/error/404";
 }
 

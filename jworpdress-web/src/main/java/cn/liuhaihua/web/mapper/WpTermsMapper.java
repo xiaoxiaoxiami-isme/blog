@@ -39,6 +39,7 @@ public interface WpTermsMapper extends BaseMapper<TermsVO>{
 			+ "from wp_term_taxonomy  wtt LEFT JOIN  wp_terms wt  on wtt.term_id=wt.term_id "
 			+ "where wtt.taxonomy=#{taxonomy}   ORDER BY wtt.count  desc ")
 	public List<TermsVO> queryTermListByTaxonomy(@Param("taxonomy") String taxonomy);
+	
 	/**
 	 * @Title: queryTermListByObjectId
 	 * @Description: 根据文章id查询所属的标签和分类集合
@@ -53,6 +54,18 @@ public interface WpTermsMapper extends BaseMapper<TermsVO>{
 			+ " LEFT JOIN  wp_term_relationships  wtr  on wtt.term_taxonomy_id =wtr.term_taxonomy_id "
 			+ "where  wtr.object_id=#{objectId} ")
 	public List<TermsVO> queryTermListByObjectId(@Param("objectId") Long objectId);
+	
+	/**
+	 * @Title: getRelatePostByTerms
+	 * @Description:根据标签和分类查询相关的文章
+	 * @param terms
+	 * @return    参数
+	 */
+	@Select(" SELECT DISTINCT wtr.object_id  FROM	wp_term_taxonomy wtt "
+			+ " LEFT JOIN wp_terms wt ON wtt.term_id = wt.term_id "
+			+ " LEFT JOIN wp_term_relationships wtr ON wtt.term_taxonomy_id = wtr.term_taxonomy_id "
+			+ " WHERE	wtr.term_taxonomy_id in (#{termsIds}) ORDER BY RAND() LIMIT #{count}")
+	public List<Long> queryRelatePostByTerms(@Param("termsIds") String termsIds,@Param("count") int count);
 	
 	
 }

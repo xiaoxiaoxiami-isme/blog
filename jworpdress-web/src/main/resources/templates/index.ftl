@@ -37,7 +37,7 @@
                 <#list page.list as item>
                     <article class="fade-in">
                         <figure class="thumbnail">
-                            <a href="${config.siteUrl}/archives/${item.id?c}">
+                            <a href="${config.siteUrl}/posts/${item.id?c}">
                                 <#if item.coverImage?exists && (item.coverImage?length > 7)>
                                     <img width="150" height="150" data-original="${config.qiuniuBasePath}${item.coverImage}-img_150x150" class="img-responsive lazy-img" alt="${item.postTitle?if_exists}">
                                 <#else>

@@ -19,11 +19,14 @@
  */
 package cn.liuhaihua.web;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.pagehelper.PageInfo;
 
+import cn.liuhaihua.web.model.WpPosts;
 import cn.liuhaihua.web.service.WpPostsService;
 import cn.liuhaihua.web.util.FastJsonUtil;
 import cn.liuhaihua.web.util.PostConstant;
@@ -57,5 +60,33 @@ public class WpPostsServiceImplTest extends BaseTest{
 		PageInfo<PostVO> page1 =wpPostsService.getPostListByPage(postParam);
 		System.out.println("分页大小:"+page.getTotal()+"|"+FastJsonUtil.json2String(page1.getList()));
 	}
-	
+	/**
+	 * @Title: getRelatePost
+	 * @Description: 相关文章
+	 */
+	@Test
+    public void getRelatePost() {
+		List<WpPosts> list =wpPostsService.getRelatePost(9l);
+		System.out.println("相关文章:"+FastJsonUtil.json2String(list));
+	}
+	/**
+	 *
+	 * @Title: getNextPost
+	 * @Description: 下一篇文章
+	 */
+	@Test
+    public void getNextPost() {
+		WpPosts  obj =wpPostsService.getNextPost(146l);
+		System.out.println("下一篇文章:"+FastJsonUtil.json2String(obj));
+	}
+	/**
+	 * 
+	 * @Title: getPrevPost
+	 * @Description: 上一篇文章
+	 */
+	@Test
+    public void getPrevPost() {
+		WpPosts  obj =wpPostsService.getPrevPost(146l);
+		System.out.println("上一篇文章:"+FastJsonUtil.json2String(obj));
+	}
 }

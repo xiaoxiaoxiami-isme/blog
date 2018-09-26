@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -75,5 +77,28 @@ public class IndexController {
         PageInfo<PostVO>  page = wpPostsService.getPostListByPage(postParam);
         model.addAttribute("page", page);
         return  new ModelAndView(TemplateConstant.INDEX_URL);
+    }
+    /**
+     * 文章详情
+     *
+     * @param model
+     * @param articleId
+     * @return
+     */
+    @GetMapping("/posts/{postId}")
+    public ModelAndView article(Model model, @PathVariable("postId") Long postId) {
+    	PostVO postVO = wpPostsService.getPostByID(postId);
+        if (postVO == null ) {
+            return new ModelAndView(TemplateConstant.ERROR_404);
+        }
+        model.addAttribute("detail", postVO);
+        // 上一篇
+        model.addAttribute("prev", wpPostsService.getPrevPost(postId));
+        //下一篇
+        model.addAttribute("next", wpPostsService.getNextPost(postId));
+        // 相关文章
+       // model.addAttribute("relatedList", bizArticleService.listRelatedArticle(SIDEBAR_ARTICLE_SIZE, article));
+        model.addAttribute("articleDetail", true);
+        return  new ModelAndView(TemplateConstant.POST_URL);
     }
 }
