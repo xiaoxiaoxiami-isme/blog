@@ -19,10 +19,7 @@
  */
 package cn.liuhaihua.web.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +30,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 
 import cn.liuhaihua.web.service.WpPostsService;
-import cn.liuhaihua.web.util.RedisConstant;
 import cn.liuhaihua.web.util.TemplateConstant;
 import cn.liuhaihua.web.vo.PostParam;
 import cn.liuhaihua.web.vo.PostVO;
-import cn.liuhaihua.web.vo.SeoVO;
-import cn.liuhaihua.web.vo.WebConfig;
 /**
  * @ClassName: IndexController
  * @Description: 首页
@@ -47,9 +41,8 @@ import cn.liuhaihua.web.vo.WebConfig;
  *
  */
 @Controller
-public class IndexController {
-	@Autowired
-	private RedisTemplate<String,Object> redisTemplate;
+public class IndexController extends BaseController{
+	
 	@Autowired
 	private WpPostsService wpPostsService;
 	/**
@@ -58,21 +51,9 @@ public class IndexController {
      * @param model
      * @return
      */
-    @SuppressWarnings("unchecked")
 	@RequestMapping("/")
     public ModelAndView home(Model model) {
-    	WebConfig  config  =  new  WebConfig();
-    	Map<String,String> map =(Map<String, String>) redisTemplate.opsForValue().get(RedisConstant.autoloadConfig);
-    	config.setHomeDesc(map.get("homeDesc"));
-    	config.setHomeKeywords(map.get("homeKeywords"));
-    	config.setSiteName(map.get("blogname"));
-    	config.setSiteUrl(map.get("siteurl"));
-        model.addAttribute("config", config);
-        SeoVO  seoVO  =   new  SeoVO();
-        seoVO.setTitle("HARRIES BLOG™-追心中的海，逐世界的梦");
-        seoVO.setKeywords("IT教程，互联网资讯，创业资讯，知识问答，生活感悟，编程技术，运维管理，分布式缓存，开发框架，数据库，集成工具，投资资讯，自动化，操作系统， 虚拟化，监控软件");
-        seoVO.setDescription("HARRIES BLOG™是国内领先的IT技术博客，分布式缓存博客，编程技术博客,创业指导博客,IT投资资讯博客,IT运维博客,IT教程博客，互联网资讯博客，,云");
-        model.addAttribute("seoVO", seoVO);
+    	super.loadConfig(model);
         PostParam postParam  =  new PostParam();  
         PageInfo<PostVO>  page = wpPostsService.getPostListByPage(postParam);
         model.addAttribute("page", page);
@@ -85,19 +66,20 @@ public class IndexController {
      * @param articleId
      * @return
      */
-    @GetMapping("/posts/{postId}")
+    @GetMapping("/archives/{postId}")
     public ModelAndView article(Model model, @PathVariable("postId") Long postId) {
+    	super.loadConfig(model);
     	PostVO postVO = wpPostsService.getPostByID(postId);
         if (postVO == null ) {
             return new ModelAndView(TemplateConstant.ERROR_404);
         }
-        model.addAttribute("detail", postVO);
+        model.addAttribute("article", postVO);
         // 上一篇
         model.addAttribute("prev", wpPostsService.getPrevPost(postId));
         //下一篇
         model.addAttribute("next", wpPostsService.getNextPost(postId));
         // 相关文章
-       // model.addAttribute("relatedList", bizArticleService.listRelatedArticle(SIDEBAR_ARTICLE_SIZE, article));
+        model.addAttribute("relatedList", wpPostsService.getRelatePost(postId));
         model.addAttribute("articleDetail", true);
         return  new ModelAndView(TemplateConstant.POST_URL);
     }

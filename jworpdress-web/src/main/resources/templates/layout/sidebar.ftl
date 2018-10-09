@@ -101,7 +101,7 @@
                             <#list recentList as item>
                                 <li>
                                     <span class="li-icon li-icon-${item_index + 1}">${item_index + 1}</span>
-                                    <a href="${config.siteUrl}/article/${item.id?c}" title="${item.postTitle}" data-toggle="tooltip" data-placement="bottom">
+                                    <a href="${config.siteUrl}/archives/${item.id?c}" title="${item.postTitle}" data-toggle="tooltip" data-placement="bottom">
                                         ${item.postTitle}
                                     </a>
                                 </li>
@@ -117,7 +117,7 @@
                             <#list recommendedList as item>
                                 <li>
                                     <span class="li-icon li-icon-${item_index + 1}">${item_index + 1}</span>
-                                    <a href="${config.siteUrl}/article/${item.id?c}" title="${item.postTitle}" data-toggle="tooltip" data-placement="bottom">
+                                    <a href="${config.siteUrl}/archives/${item.id?c}" title="${item.postTitle}" data-toggle="tooltip" data-placement="bottom">
                                         ${item.postTitle}
                                     </a>
                                 </li>
@@ -133,7 +133,7 @@
                             <#list randomList as item>
                                 <li>
                                     <span class="li-icon li-icon-${item_index + 1}">${item_index + 1}</span>
-                                    <a href="${config.siteUrl}/article/${item.id?c}" title="${item.postTitle}" data-toggle="tooltip" data-placement="bottom">
+                                    <a href="${config.siteUrl}/archives/${item.id?c}" title="${item.postTitle}" data-toggle="tooltip" data-placement="bottom">
                                         ${item.postTitle}
                                     </a>
                                 </li>

@@ -89,4 +89,14 @@ public class WpPostsServiceImplTest extends BaseTest{
 		WpPosts  obj =wpPostsService.getPrevPost(146l);
 		System.out.println("上一篇文章:"+FastJsonUtil.json2String(obj));
 	}
+	/**
+	 * 
+	 * @Title: getPostByID
+	 * @Description: 获取单篇文章内容
+	 */
+	@Test
+    public void getPostByID() {
+		WpPosts  obj =wpPostsService.getPostByID(146l);
+		System.out.println("文章:"+FastJsonUtil.json2String(obj));
+	}
 }
