@@ -114,7 +114,7 @@
             <div class="blog-body prev-next">
                 <nav class="nav-single wow" data-wow-delay="0.3s">
                     <#if prev??>
-                        <a href="${config.siteUrl}/article/${prev.id}" rel="prev">
+                        <a href="${config.siteUrl}/archives/${prev.id?c}" rel="prev">
                             <span class="meta-nav" data-original-title="${prev.postTitle}" data-toggle="tooltip" data-placement="bottom"><span class="post-nav"><i class="fa fa-angle-left"></i> 上一篇</span>
                                 <br>${prev.postTitle}
                             </span>
@@ -127,7 +127,7 @@
                         </a>
                     </#if>
                     <#if next??>
-                        <a href="${config.siteUrl}/article/${next.id}" rel="next">
+                        <a href="${config.siteUrl}/archives/${next.id?c}" rel="next">
                             <span class="meta-nav" data-original-title="${next.postTitle}" data-toggle="tooltip" data-placement="bottom"><span class="post-nav">下一篇 <i class="fa fa-angle-right"></i></span>
                                 <br>${next.postTitle}
                             </span>

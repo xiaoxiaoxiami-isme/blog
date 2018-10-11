@@ -44,7 +44,8 @@ public class PostVO  extends WpPosts {
 	 * 文章摘要
 	 */
 	public String getPostExcerpt(){
-		String delHTMLTagstr =HtmlFilterUtil.delHTMLTag(getPostContent());
+		String postContent=getPostContent();
+		String delHTMLTagstr =HtmlFilterUtil.delHTMLTag(postContent);
 		if(delHTMLTagstr.length()>200){
 			return delHTMLTagstr.substring(0, 200)+"...";
 		}else{

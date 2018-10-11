@@ -43,15 +43,36 @@
     <#if page?exists && (page.pages > 1)>
     <nav>
         <ul class="pager page-btn" data-url="${config.siteUrl}/${url?if_exists}" data-search="">
+           <#-- 是否上一页--> 
             <#if page.hasPreviousPage>
-            <li><a class="pointer" data-page="${page.prePage}"><i class="fa fa-angle-double-left"></i></a></li>
+             <li><a class="pointer" data-page="1">首页</i></a></li>
+            <li><a class="pointer" data-page="${page.prePage}">上一页</i></a></li>
             </#if>
-            <#list 1..page.pages as item>
-            <li><a ${(page.pageNum == item)?string('class="pointer active"','class="pointer" data-page="${item?c}"')}>${item?c}</a></li>
-            </#list>
-            <#if page.hasNextPage>
-            <li><a class="pointer" data-page="${page.nextPage}"><i class="fa fa-angle-double-right"></i></a></li>
-            </#if>
+
+				<#--处理开头部分逻辑 -->
+			 <#if (page.navigateFirstPage = 2)>
+			        		<li><a class="pointer" data-page="1">1</a></li>
+			        <#elseif (page.navigateFirstPage > 2)>
+			        		<li><a class="pointer" data-page="1">1</a></li>
+			        		<li>...</li>
+			  </#if>      
+			  <#-- 中间显示页数--> 
+			  <#list page.navigateFirstPage..page.navigateLastPage as item>
+			  			<li><a ${(page.pageNum == item)?string('class="pointer active"','class="pointer" data-page="${item?c}"')}>${item?c}</a></li>
+			  </#list>
+               <#--处理结果部分显示的逻辑--> 
+				<#if (page.navigateLastPage = page.pages-1)>
+			        		<li><a class="pointer" data-page="${page.pages}">${page.pages}</a></li>
+			        <#elseif (page.navigateLastPage < page.pages-1)>
+			        		<li>...</li>
+			        		<li><a class="pointer" data-page="${page.pages}">${page.pages}</a></li>
+			  </#if> 
+ 			 <#-- 是否下一页--> 
+			  <#if page.hasNextPage>
+			            <li><a class="pointer active" data-page="${page.nextPage}">下一页</i></a></li>
+			              <li><a class="pointer" data-page="${page.pages}">尾页</i></a></li>
+           		 </#if>
+               <li> 共 ${page.pages} 页 </li>
         </ul>
     </nav>
     </#if>

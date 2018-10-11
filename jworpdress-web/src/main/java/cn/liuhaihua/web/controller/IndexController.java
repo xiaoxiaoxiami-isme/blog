@@ -83,4 +83,21 @@ public class IndexController extends BaseController{
         model.addAttribute("articleDetail", true);
         return  new ModelAndView(TemplateConstant.POST_URL);
     }
+    /**
+     * 首页（分页）
+     *
+     * @param pageNumber
+     * @param vo
+     * @param model
+     * @return
+     */
+    @RequestMapping("/page/{pageNum}")
+    public ModelAndView type(@PathVariable("pageNum") Integer pageNum,Model model) {
+    	super.loadConfig(model);
+        PostParam postParam  =  new PostParam();  
+        postParam.setPageNum(pageNum);
+        PageInfo<PostVO>  page = wpPostsService.getPostListByPage(postParam);
+        model.addAttribute("page", page);
+        return  new ModelAndView(TemplateConstant.INDEX_URL);
+    }
 }
