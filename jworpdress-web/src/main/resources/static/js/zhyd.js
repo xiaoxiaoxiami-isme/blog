@@ -229,14 +229,6 @@ $(function () {
         $("#currentTime").html(now.format('yyyy年MM月dd日 hh时mm分ss秒') + " " + weekArr[now.getDay()]);
     }
 
-    $.websocket.open({
-        host: "ws://localhost:8443/websocket",
-        reconnect: true,
-        callback: function (json) {
-            var onlineCount = json;
-            $(".online").html(onlineCount);
-        }
-    });
 
     /**
      * 显示取链的表格

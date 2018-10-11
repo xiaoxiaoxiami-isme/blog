@@ -38,7 +38,7 @@ import cn.liuhaihua.web.vo.WebConfig;
  */
 public class BaseController {
 	@Autowired
-	private RedisTemplate<String,Object> redisTemplate;
+	public RedisTemplate<String,Object> redisTemplate;
 	/**
 	 * @Title: loadConfig
 	 * @Description: 加载网站配置
