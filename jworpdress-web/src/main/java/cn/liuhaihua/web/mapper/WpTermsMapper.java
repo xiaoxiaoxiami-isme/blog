@@ -64,9 +64,19 @@ public interface WpTermsMapper extends BaseMapper<TermsVO>{
 	@Select(" SELECT DISTINCT wtr.object_id  FROM	wp_term_taxonomy wtt "
 			+ " LEFT JOIN wp_terms wt ON wtt.term_id = wt.term_id "
 			+ " LEFT JOIN wp_term_relationships wtr ON wtt.term_taxonomy_id = wtr.term_taxonomy_id "
-			+ " WHERE	wtr.term_taxonomy_id in (#{termsIds}) ORDER BY RAND() LIMIT #{count}")
-	public List<Long> queryRelatePostByTerms(@Param("termsIds") String termsIds,@Param("count") int count);
+			+ " WHERE	wtr.term_taxonomy_id in (#{termsIds})  and wtr.object_id <>#{postId}  ORDER BY RAND() LIMIT #{count}")
+	public List<Long> queryRelatePostByTerms(@Param("termsIds") String termsIds,@Param("count") int count,@Param("postId") Long postId);
 	
-	
+	/**
+	 * @Title: getRelatePostByTerms
+	 * @Description:根据标签和分类查询相关的文章
+	 * @param terms
+	 * @return    参数
+	 */
+	@Select(" SELECT DISTINCT wtr.object_id  FROM	wp_term_taxonomy wtt "
+			+ " LEFT JOIN wp_terms wt ON wtt.term_id = wt.term_id "
+			+ " LEFT JOIN wp_term_relationships wtr ON wtt.term_taxonomy_id = wtr.term_taxonomy_id "
+			+ " WHERE	wtt.term_id =#{termsId}  and  wtt.taxonomy ='${taxonomy}' ")
+	public List<Long> queryPostIdsByTermsId(@Param("termsId") Long termsId,@Param("taxonomy") String taxonomy);
 }
  

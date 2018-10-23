@@ -31,6 +31,7 @@ import com.github.pagehelper.PageInfo;
 
 import cn.liuhaihua.web.service.WpPostsService;
 import cn.liuhaihua.web.util.TemplateConstant;
+import cn.liuhaihua.web.util.TermsConstants;
 import cn.liuhaihua.web.vo.PostParam;
 import cn.liuhaihua.web.vo.PostVO;
 /**
@@ -92,7 +93,7 @@ public class IndexController extends BaseController{
      * @return
      */
     @RequestMapping("/page/{pageNum}")
-    public ModelAndView type(@PathVariable("pageNum") Integer pageNum,Model model) {
+    public ModelAndView page(@PathVariable("pageNum") Integer pageNum,Model model) {
     	super.loadConfig(model);
         PostParam postParam  =  new PostParam();  
         postParam.setPageNum(pageNum);
@@ -100,4 +101,41 @@ public class IndexController extends BaseController{
         model.addAttribute("page", page);
         return  new ModelAndView(TemplateConstant.INDEX_URL);
     }
+    /**
+     * 分类列表
+     *
+     * @param typeId
+     * @param model
+     * @return
+     */
+    @GetMapping("/type/{typeId}")
+    public ModelAndView type(@PathVariable("typeId") Long typeId, Model model) {
+    	super.loadConfig(model);
+        PostParam postParam  =  new PostParam();  
+        postParam.setTermId(typeId);
+        postParam.setTaxonomy(TermsConstants.category);
+        PageInfo<PostVO>  page = wpPostsService.getTermsListByPage(postParam);
+        model.addAttribute("page", page);
+        return  new ModelAndView(TemplateConstant.INDEX_URL);
+    }
+    
+    /**
+     * 分类列表
+     *
+     * @param typeId
+     * @param model
+     * @return
+     */
+    @GetMapping("/tag/{tagId}")
+    public ModelAndView tag(@PathVariable("tagId") Long tagId, Model model) {
+    	super.loadConfig(model);
+        PostParam postParam  =  new PostParam();  
+        postParam.setTermId(tagId);
+        postParam.setTaxonomy(TermsConstants.post_tag);
+        PageInfo<PostVO>  page = wpPostsService.getTermsListByPage(postParam);
+        model.addAttribute("page", page);
+        return  new ModelAndView(TemplateConstant.INDEX_URL);
+    }
+
+
 }

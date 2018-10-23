@@ -67,18 +67,21 @@ public class WpPostsServiceImpl implements WpPostsService {
 	public PageInfo<PostVO> getPostListByPage(PostParam postParam) throws ServiceException {
 		int pageNum = postParam.getPageNum();// 起始页
 		int pageSize = postParam.getPageSize();// 每页显示条数
+		List<Long>  postIds =postParam.getPostIds();
 		if (pageNum <= 0){
 			pageNum = 1;
 		}
 		if (pageSize <= 0) {
 			pageSize = 10;
 		}
-		
 		PageHelper.startPage(pageNum,pageSize);
 		Example   example =  new Example(WpPosts.class);
 		Criteria criteria = example.createCriteria();
 		criteria.andEqualTo("postType", PostConstant.POSTTYPE_POST);
 		criteria.andEqualTo("postStatus",PostConstant.POSTSTATUS_PUBLISH);
+		if(null!=postIds&&postIds.size()>0){
+			criteria.andIn("id", postIds);
+		}
 		if(!StringUtils.isEmpty(postParam.getSortType())){
 			if(postParam.getSortType().equals(PostConstant.SORTTYPE_COMMMENT)){
 				example.setOrderByClause(" comment_count  desc  ");
@@ -195,16 +198,31 @@ public class WpPostsServiceImpl implements WpPostsService {
 			return null;
 		}else{
 			termsIds = termsIds.substring(1,termsIds.length());
-			List<Long>  postIdsList =wpTermsMapper.queryRelatePostByTerms(termsIds, 4);
+			List<Long>  postIdsList =wpTermsMapper.queryRelatePostByTerms(termsIds, 4,postId);
 			Example   example =  new Example(WpPosts.class);
 			Criteria criteria = example.createCriteria();
 			criteria.andEqualTo("postType", PostConstant.POSTTYPE_POST);
 			criteria.andEqualTo("postStatus",PostConstant.POSTSTATUS_PUBLISH);
-			criteria.andIn("id", postIdsList);
-			List<WpPosts>   list = wpPostsMapper.selectByExample(example);
-			return list;
+			if(null!=postIdsList&&postIdsList.size()>0){
+				criteria.andIn("id", postIdsList);
+				List<WpPosts>   list = wpPostsMapper.selectByExample(example);
+				return list;
+			}else{
+				return null;
+			}
 		}
 		
 	}
-	
+	/** 
+	 * @param postParam
+	 * @return
+	 * @throws ServiceException
+	 * @see cn.liuhaihua.web.service.WpPostsService#getTagListByPage(cn.liuhaihua.web.vo.PostParam)
+	 */
+	@Override
+	public PageInfo<PostVO> getTermsListByPage(PostParam postParam) throws ServiceException {
+		List<Long>  postIds =wpTermsMapper.queryPostIdsByTermsId(postParam.getTermId(),postParam.getTaxonomy());
+		postParam.setPostIds(postIds);
+		return this.getPostListByPage(postParam);
+	}
 }

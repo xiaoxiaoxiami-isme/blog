@@ -83,7 +83,15 @@
                             <div class="clear"></div>
                         </div>
                     </div>
-                    <div class="article-footer overflow-initial">所属分类：<a href="${config.siteUrl}/type/${article.typeId?if_exists}" data-original-title="点击查看${article.typename?if_exists}分类的文章" data-toggle="tooltip" data-placement="bottom">${article.typename?if_exists}</a></div>
+                    <div class="article-footer overflow-initial">所属分类：
+                 <#if article.termsList?exists && (article.termsList?size > 0)>
+                     <#list article.termsList as item>
+                                    <#if item.taxonomy?exists && (item.taxonomy=='category')>
+                                  			  <a href="${config.siteUrl}/type/${item.termId?if_exists}" data-original-title="点击查看${item.name?if_exists}分类的文章" data-toggle="tooltip" data-placement="bottom">${item.name?if_exists}</a>
+                            		 </#if>
+                    </#list>
+                  </#if >
+                    </div>
                 </div>
             </div>
             <div class="blog-body article-tag">
@@ -91,11 +99,13 @@
                     <ul class="list-unstyled">
                         <li>
                             <strong>本文标签：</strong>
+                               <#if article.termsList?exists && (article.termsList?size > 0)>
                                 <#list article.termsList as item>
                                     <#if item.taxonomy?exists && (item.taxonomy=='post_tag')>
                                    			 <a href="${config.siteUrl}/tag/${item.termId}" class="c-label" data-original-title="${item.name}" data-toggle="tooltip" data-placement="bottom" target="_blank">${item.name}</a>
                             		 </#if>
                                 </#list>
+  </#if >
                         </li>
                         <li>
                             <strong>版权声明：</strong>
@@ -183,10 +193,13 @@
                 </ul>
                 <div class="clear"></div>
             </div>
+                  
             <#-- 相关文章 -->
+   <#if relatedList?exists && (relatedList?size > 0)>
             <div class="blog-body clear overflow-initial">
                 <h4 class="bottom-line"><i class="fa fa-google-wallet icon"></i><strong>相关文章</strong></h4>
                 <ul class="list-unstyled">
+            
                     <#list relatedList as item>
                         <li class="line-li">
                             <div class="line-container">
@@ -200,9 +213,11 @@
                             </div>
                         </li>
                     </#list>
+ 			
                 </ul>
                 <div class="clear"></div>
             </div>
+               </#if>
             <#--评论-->
              <#if article.commentStatus?exists && (article.commentStatus=='open')>
                 <div class="blog-body clear overflow-initial expansion">

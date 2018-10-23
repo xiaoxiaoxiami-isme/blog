@@ -19,6 +19,8 @@
  */
 package cn.liuhaihua.web.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -36,6 +38,14 @@ public class PostParam {
 
 	//每页显示数量
 	private int  pageSize;
+	//文章ID
+	private List<Long> postIds;
+	//标签或者类型id
+	private Long termId;
+	/**
+	 * 标签还是分类
+	 */
+	private String taxonomy;
 	/**
 	 * 文章排序类型
 	 */

@@ -46,6 +46,15 @@ public interface WpPostsService {
 	 * @throws
 	 */
 	public PageInfo<PostVO> getPostListByPage(PostParam postParam) throws ServiceException;
+	/**
+	 * @Title: getTagListByPage
+	 * @Description: 分页获取标签或者分类下文章列表
+	 * @param postParam
+	 * @return
+	 * @throws ServiceException    参数
+	 */
+	public PageInfo<PostVO> getTermsListByPage(PostParam postParam ) throws ServiceException;
+	
 	
 	/**
 	 * @Title: getPostByID
