@@ -313,7 +313,7 @@ $(function () {
         if(!pageNum){
             return;
         }
-        var action = url + "page/" + pageNum;
+        var action = url + "/" + pageNum;
 
         if(search){
             $("#searchForm").find("input[name=pageNumber]").val(pageNum);

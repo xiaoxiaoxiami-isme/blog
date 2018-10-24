@@ -58,6 +58,7 @@ public class IndexController extends BaseController{
         PostParam postParam  =  new PostParam();  
         PageInfo<PostVO>  page = wpPostsService.getPostListByPage(postParam);
         model.addAttribute("page", page);
+        model.addAttribute("url", "index");
         return  new ModelAndView(TemplateConstant.INDEX_URL);
     }
     /**
@@ -92,13 +93,14 @@ public class IndexController extends BaseController{
      * @param model
      * @return
      */
-    @RequestMapping("/page/{pageNum}")
+    @RequestMapping("/index/{pageNum}")
     public ModelAndView page(@PathVariable("pageNum") Integer pageNum,Model model) {
     	super.loadConfig(model);
         PostParam postParam  =  new PostParam();  
         postParam.setPageNum(pageNum);
         PageInfo<PostVO>  page = wpPostsService.getPostListByPage(postParam);
         model.addAttribute("page", page);
+        model.addAttribute("url", "index");
         return  new ModelAndView(TemplateConstant.INDEX_URL);
     }
     /**
@@ -116,9 +118,29 @@ public class IndexController extends BaseController{
         postParam.setTaxonomy(TermsConstants.category);
         PageInfo<PostVO>  page = wpPostsService.getTermsListByPage(postParam);
         model.addAttribute("page", page);
+        model.addAttribute("url", "type/" + typeId);
         return  new ModelAndView(TemplateConstant.INDEX_URL);
     }
-    
+    /**
+     * 分类列表（分页）
+     *
+     * @param typeId
+     * @param pageNumber
+     * @param model
+     * @return
+     */
+    @GetMapping("/type/{typeId}/{pageNumber}")
+    public ModelAndView type(@PathVariable("typeId") Long typeId, @PathVariable("pageNumber") Integer pageNumber, Model model) {
+    	super.loadConfig(model);
+        PostParam postParam  =  new PostParam();  
+        postParam.setTermId(typeId);
+        postParam.setTaxonomy(TermsConstants.category);
+        postParam.setPageNum(pageNumber);
+        PageInfo<PostVO>  page = wpPostsService.getTermsListByPage(postParam);
+        model.addAttribute("page", page);
+        model.addAttribute("url", "type/" + typeId);
+        return  new ModelAndView(TemplateConstant.INDEX_URL);
+    }
     /**
      * 分类列表
      *
@@ -134,8 +156,28 @@ public class IndexController extends BaseController{
         postParam.setTaxonomy(TermsConstants.post_tag);
         PageInfo<PostVO>  page = wpPostsService.getTermsListByPage(postParam);
         model.addAttribute("page", page);
+        model.addAttribute("url", "tag/" + tagId);
         return  new ModelAndView(TemplateConstant.INDEX_URL);
     }
-
+    /**
+     * 标签列表（分页）
+     *
+     * @param tagId
+     * @param pageNumber
+     * @param model
+     * @return
+     */
+    @GetMapping("/tag/{tagId}/{pageNumber}")
+    public ModelAndView tag(@PathVariable("tagId") Long tagId, @PathVariable("pageNumber") Integer pageNumber, Model model) {
+    	super.loadConfig(model);
+        PostParam postParam  =  new PostParam();  
+        postParam.setTermId(tagId);
+        postParam.setTaxonomy(TermsConstants.post_tag);
+        postParam.setPageNum(pageNumber);
+        PageInfo<PostVO>  page = wpPostsService.getTermsListByPage(postParam);
+        model.addAttribute("page", page);
+        model.addAttribute("url", "tag/" + tagId);
+        return  new ModelAndView(TemplateConstant.INDEX_URL);
+    }
 
 }
