@@ -194,7 +194,7 @@
                 <div class="clear"></div>
             </div>
                   
-            <#-- 相关文章 -->
+   <#-- 相关文章 -->
    <#if relatedList?exists && (relatedList?size > 0)>
             <div class="blog-body clear overflow-initial">
                 <h4 class="bottom-line"><i class="fa fa-google-wallet icon"></i><strong>相关文章</strong></h4>

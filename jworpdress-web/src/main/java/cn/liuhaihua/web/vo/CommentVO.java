@@ -17,39 +17,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web.service;
+package cn.liuhaihua.web.vo;
 
-import java.util.List;
-
-import com.github.pagehelper.PageInfo;
-
-import cn.liuhaihua.web.model.WpComments;
-import cn.liuhaihua.web.vo.CommentVO;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
- * @ClassName: WpCommentsService
- * @Description: 评论服务类
+ * @ClassName: CommentVO
+ * @Description: 留言
  * @author Liuhaihua
- * @date 2018年8月25日
+ * @date 2018年10月25日
  *
  */
-public interface WpCommentsService {
-	/**
-	 * 
-	 * @Title: getRecentComments
-	 * @Description: 获取最近10条记录
-	 * @param @return    参数
-	 * @return List<WpComments>    返回类型
-	 * @throws
-	 */
-	public List<WpComments>  getRecentComments(int pageSize);
-	/**
-	 * @Title: getCommentsByPostId
-	 * @Description: 分页获取某篇文章的留言列表
-	 * @param postId
-	 * @param pageSize
-	 * @param currentPage
-	 * @return    参数
-	 */
-	public PageInfo<WpComments>  getCommentsByPostId(CommentVO commentVO);
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class CommentVO  extends BaseVO{
+	//userid
+	private Long userId;
+	//文章ID
+	private Long sid; 
+	//留言父ID
+	private Long pid;
+	private String qq;
+	private String email;
+	private String url;
+	//状态
+	private String status;
 }

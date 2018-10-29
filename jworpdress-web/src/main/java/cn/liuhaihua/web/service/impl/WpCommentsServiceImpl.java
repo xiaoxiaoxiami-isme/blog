@@ -26,12 +26,14 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import cn.liuhaihua.web.mapper.WpCommentsMapper;
 import cn.liuhaihua.web.model.WpComments;
-import cn.liuhaihua.web.model.WpUsers;
 import cn.liuhaihua.web.service.WpCommentsService;
+import cn.liuhaihua.web.vo.CommentVO;
 import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.entity.Example.Criteria;
 
 /**
  * @ClassName: WpCommentsService
@@ -55,6 +57,26 @@ public class WpCommentsServiceImpl implements WpCommentsService {
 		example.setOrderByClause(" comment_date  DESC ");
 		Page<WpComments>  page =(Page<WpComments>) wpCommentsMapper.selectByExample(example);
 		return page.getResult();
+	}
+	/** 
+	 * @param postId
+	 * @param pageSize
+	 * @param currentPage
+	 * @return
+	 * @see cn.liuhaihua.web.service.WpCommentsService#getCommentsByPostId(java.lang.Long, int, int)
+	 */
+	@Override
+	public PageInfo<WpComments> getCommentsByPostId(CommentVO commentVO) {
+		Long postId =commentVO.getSid();
+        int pageSize=commentVO.getPageSize();
+		int currentPage=commentVO.getPageNumber();
+		PageHelper.startPage(currentPage, pageSize);
+		Example  example =  new Example(WpComments.class);
+		Criteria criteria = example.createCriteria();
+		criteria.andEqualTo("commentPostId", postId);
+		example.setOrderByClause(" comment_date  DESC ");
+		Page<WpComments>  page =(Page<WpComments>) wpCommentsMapper.selectByExample(example);
+		return page.toPageInfo();
 	}
 
 }

@@ -108,7 +108,7 @@ $(function(){
                         + '<input type="hidden" name="pid" id="comment-pid" value="0" size="22" tabindex="1">'
                         + '<textarea id="comment_content" name="content" style="display: none"></textarea>'
                         + '<div id="editor" style="width: 100%;height: 150px;"></div>'
-                        + '<div style="position: absolute;right: 10px;bottom: 65px;font-size: 14px;font-weight: 700;color: #ececec;">张亚东博客<br>https://www.zhyd.me<br>讲文明、要和谐</div>'
+                        + '<div style="position: absolute;right: 10px;bottom: 65px;font-size: 14px;font-weight: 700;color: #ececec;">HARRIES BLOG<br>http://www.liuhaihua.cn<br>讲文明、要和谐</div>'
                         + '<a id="comment-form-btn" type="button" data-loading-text="正在提交评论..." class="btn btn-default btn-block">提交评论</a>'
                         + '</form></div></div>';
                 $box.html(commentBox);
@@ -167,7 +167,8 @@ $(function(){
                     success: function (json) {
                         $.tool.ajaxSuccess(json);
                         // 加载 评论列表 start
-                        var commentList = json.data.commentList;
+                        var commentList = json.data.list;
+                        console.log(commentList);
                         var commentListBox  = '';
                         if(!commentList){
                             commentListBox = '<div class="commentList">'
@@ -190,31 +191,26 @@ $(function(){
                             }
                             for(var i = 0, len = commentList.length; i < len ; i ++){
                                 var comment = commentList[i];
-                                var userUrl = comment.url || "javascript:void(0)";
+                                var userUrl = comment.commentAuthorUrl || "javascript:void(0)";
                                 var parent = comment.parent;
-                                var parentQuote = parent ? '<a href="#comment-' + parent.id + '" class="comment-quote">@' + parent.nickname + '</a><div style="background-color: #f5f5f5;padding: 5px;margin: 5px;border-radius: 4px;"><i class="fa fa-quote-left"></i><p></p><div style="padding-left: 10px;">' + filterXSS(parent.content) + '</div></div>' : '';
+                                var parentQuote = parent ? '<a href="#comment-' + parent.commentId + '" class="comment-quote">@' + parent.commentAuthor + '</a><div style="background-color: #f5f5f5;padding: 5px;margin: 5px;border-radius: 4px;"><i class="fa fa-quote-left"></i><p></p><div style="padding-left: 10px;">' + filterXSS(parent.commentContent) + '</div></div>' : '';
                                 commentListBox += '<li>' +
-                                        '    <div class="comment-body fade-in" id="comment-'+comment.id+'">' +
+                                        '    <div class="comment-body fade-in" id="comment-'+comment.commentId+'">' +
                                         '        <div class="cheader">' +
-                                        '           <div class="user-img"><img class="userImage" src="' + comment.avatar + '" onerror="this.src=\'' + appConfig.staticPath + '/img/user.png\'"></div>' +
+                                        '           <div class="user-img"><img class="userImage" src="' + comment.commentKarma + '" onerror="this.src=\'' + appConfig.staticPath + '/img/user.png\'"></div>' +
                                         '           <div class="user-info">' +
                                         '              <div class="nickname">' +
-                                        '                 <a target="_blank" href="' + userUrl + '" rel="external nofollow"><strong>' + comment.nickname + '</strong></a>' +
+                                        '                 <a target="_blank" href="' +  comment.commentAuthorUrl + '" rel="external nofollow"><strong>' + comment.commentAuthor + '</strong></a>' +
                                         '              </div>            ' +
                                         '             <div class="timer">' +
-                                        '                  <i class="fa fa-clock-o fa-fw"></i>' + comment.createTimeString +
-                                        '                  <i class="fa fa-map-marker fa-fw"></i>' + comment.address +
+                                        '                  <i class="fa fa-clock-o fa-fw"></i>' + comment.commentDate +
+                                        '                  <i class="fa fa-map-marker fa-fw"></i>' + comment.commentAuthorIp +
                                         '              </div>' +
                                         '          </div>' +
                                         '        </div>' +
-                                        '        <div class="content">' + parentQuote + '<div>' + filterXSS(comment.content) + '</div></div>' +
+                                        '        <div class="content">' + parentQuote + '<div>' + filterXSS(comment.commentContent) + '</div></div>' +
                                         '        <div class="sign">' +
-                                        '            <i class="icons os-' + comment.osShortName + '"></i>'+ comment.os +' <i class="sepa"></i>' +
-                                        '            <i class="icons browser-' + comment.browserShortName + '"></i>' + comment.browser + ' <i class="sepa"></i>' +
-                                        '            <a href="javascript:void(0);" class="comment-up" onclick="$.comment.praise(' + comment.id + ', this)"><i class="fa fa-thumbs-o-up"></i>赞(<span class="count">' + comment.support + '</span>)<i class="sepa"></i></a>' +
-                                        '            <a href="javascript:void(0);" class="comment-down" onclick="$.comment.step(' + comment.id + ', this)"><i class="fa fa-thumbs-o-down"></i>踩(<span class="count">' + comment.oppose + '</span>)<i class="sepa"></i></a>' +
-                                        '            <a href="javascript:void(0);" class="comment-reply" onclick="$.comment.reply(' + comment.id + ', this)"><i class="fa fa-reply"></i>回复</a>' +
-                                        '            <a href="javascript:void(0);" class="comment-flag hide" onclick="$.comment.report(' + comment.id + ', this)"><i class="fa fa-flag"></i>举报</a>' +
+                                        '            <a href="javascript:void(0);" class="comment-reply" onclick="$.comment.reply(' + comment.commentId + ', this)"><i class="fa fa-reply"></i>回复</a>' +
                                         '        </div>' +
                                         '    </div>' +
                                         '</li>';

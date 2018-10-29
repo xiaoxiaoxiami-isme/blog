@@ -21,11 +21,17 @@ package cn.liuhaihua.web.controller;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageInfo;
+
+import cn.liuhaihua.web.model.WpComments;
+import cn.liuhaihua.web.service.WpCommentsService;
 import cn.liuhaihua.web.util.RedisConstant;
 import cn.liuhaihua.web.util.ResponseStatus;
+import cn.liuhaihua.web.vo.CommentVO;
 import cn.liuhaihua.web.vo.ResponseVO;
 /**
  * @ClassName: RestApiController
@@ -35,16 +41,31 @@ import cn.liuhaihua.web.vo.ResponseVO;
  *
  */
 @RestController
+@RequestMapping("/api")
 public class RestApiController extends BaseController{
+	@Autowired
+	private WpCommentsService wpCommentsService;
     /**
      * @Title: listNotice
      * @Description:系统通知
      * @return    参数
      */
-    @RequestMapping("/api/listNotice")
+    @SuppressWarnings("unchecked")
+	@RequestMapping("/listNotice")
     public String listNotice() {
     	Map<String,String> map =(Map<String, String>) redisTemplate.opsForValue().get(RedisConstant.autoloadConfig);
         return map.get("sys_notice");
     }
+    @RequestMapping("/comments")
+    public ResponseVO<PageInfo<WpComments>> comments(CommentVO commentVO) {
+    	try{
+    		PageInfo<WpComments>  pageinfo = wpCommentsService.getCommentsByPostId(commentVO);
+    		return  new ResponseVO<PageInfo<WpComments>>(ResponseStatus.SUCCESS,pageinfo);
+    	}catch (Exception e) {
+    		e.printStackTrace();
+			return  new ResponseVO<PageInfo<WpComments>>(ResponseStatus.ERROR,null);
+		}
+    
+    }                   
 
 }

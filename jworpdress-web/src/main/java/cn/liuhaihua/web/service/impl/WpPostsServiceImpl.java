@@ -138,7 +138,11 @@ public class WpPostsServiceImpl implements WpPostsService {
 	@Override
 	public PostVO getPostByID(Long postId) throws ServiceException {
 		WpPosts  wpPosts = wpPostsMapper.selectByPrimaryKey(postId);
-		return processPost(wpPosts);
+		if(null!=wpPosts){
+			return processPost(wpPosts);
+		}else{
+			return null;
+		}
 		
 	}
 	/** 
