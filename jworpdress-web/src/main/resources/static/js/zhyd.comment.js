@@ -105,8 +105,8 @@ $(function(){
                         + '<h4 class="bottom-line"><i class="fa fa-commenting-o fa-fw icon"></i><strong>发表评论</strong>' + currentUser + '</h4>'
                         + '<div class="cancel-reply" id="cancel-reply" style="display: none;"><a href="javascript:void(0);" onclick="$.comment.cancelReply(this)" rel="external nofollow"><i class="fa fa-share"></i>取消回复</a></div>'
                         + '<form class="form-horizontal" role="form" id="comment-form">'
-                        + '<input type="hidden" name="pid" id="comment-pid" value="0" size="22" tabindex="1">'
-                        + '<textarea id="comment_content" name="content" style="display: none"></textarea>'
+                        + '<input type="hidden" name="commentPostId" id="comment-pid" value="0" size="22" tabindex="1">'
+                        + '<textarea id="comment_content" name="commentContent" style="display: none"></textarea>'
                         + '<div id="editor" style="width: 100%;height: 150px;"></div>'
                         + '<div style="position: absolute;right: 10px;bottom: 65px;font-size: 14px;font-weight: 700;color: #ececec;">HARRIES BLOG<br>http://www.liuhaihua.cn<br>讲文明、要和谐</div>'
                         + '<a id="comment-form-btn" type="button" data-loading-text="正在提交评论..." class="btn btn-default btn-block">提交评论</a>'
@@ -164,14 +164,14 @@ $(function(){
                     type: "post",
                     url: "/api/comments",
                     data: {sid: sid, pageNumber: pageNumber || 1},
-                    success: function (json) {
-                        $.tool.ajaxSuccess(json);
+                    success: function (json) {                               
+                      //  $.tool.ajaxSuccess(json);
                         // 加载 评论列表 start
                         var commentList = json.data.list;
-                        console.log(commentList);
+                       // console.log(commentList);
                         var commentListBox  = '';
-                        if(!commentList){
-                            commentListBox = '<div class="commentList">'
+                        if(json.data.size==0){
+                            commentListBox = '<div class="commentList" >'
                                     + '<h4 class="bottom-line"><i class="fa fa-comments-o fa-fw icon"></i><strong><em>0</em> 条评论</strong></h4>'
                                     + '<ul class="comment">';
                             commentListBox += '<li><div class="list-comment-empty-w fade-in">'
@@ -185,7 +185,8 @@ $(function(){
                         }else{
                             // 首次加载-刷新页面后第一次加载，此时没有点击加载更多进行分页
                             if(!pageNumber) {
-                                commentListBox = '<div class="commentList">'
+                            	//box.attr("data-auto-load","false");
+                                commentListBox = '<div class="commentList"   data-auto-load="false" >'
                                         + '<h5 class="bottom-line"><i class="fa fa-comments-o fa-fw icon"></i><strong><em>' + json.data.total + '</em> 条评论</strong></h5>'
                                         + '<ul class="comment">';
                             }
@@ -319,7 +320,7 @@ $(function(){
                             type: "post",
                             url: "/api/qq/" + qq,
                             success: function (json) {
-                                $.tool.ajaxSuccess(json);
+                               $.tool.ajaxSuccess(json);
                                 var data = json.data;
                                 $.comment._detailForm.find("input").each(function () {
                                     var $this = $(this);
@@ -355,7 +356,7 @@ $(function(){
                     $.ajax({
                         type: "post",
                         url: "/api/comment",
-                        data: data + '&sid=' + $.comment.sid,
+                        data: data + '&commentPostId=' + $.comment.sid,
                         success: function (json) {
                             $.comment._detailFormBtn.button('reset');
                             $.tool.ajaxSuccess(json);

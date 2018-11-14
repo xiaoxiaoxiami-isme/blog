@@ -48,15 +48,15 @@
                         <span class="fa fa-qq pull-left" aria-hidden="true">QQ</span>
                     </div>
                     <div class="form-group input-logo">
-                        <input type="text" class="form-control" name="nickname" placeholder="必填" value="匿名">
+                        <input type="text" class="form-control" name="commentAuthor" placeholder="必填" value="匿名">
                         <span class="fa fa-user pull-left" aria-hidden="true">昵称</span>
                     </div>
                     <div class="form-group input-logo">
-                        <input type="text" class="form-control" name="email" placeholder="选填">
+                        <input type="text" class="form-control" name="commentAuthorEmail" placeholder="选填">
                         <span class="fa fa-envelope pull-left" aria-hidden="true">邮箱</span>
                     </div>
                     <div class="form-group input-logo">
-                        <input type="text" class="form-control" name="url" placeholder="选填">
+                        <input type="text" class="form-control" name="commentAuthorUrl" placeholder="选填">
                         <span class="fa fa-globe pull-left" aria-hidden="true">网址</span>
                     </div>
                     <div class="form-group">

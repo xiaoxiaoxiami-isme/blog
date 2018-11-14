@@ -28,6 +28,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import cn.liuhaihua.web.exception.ServiceException;
 import cn.liuhaihua.web.mapper.WpCommentsMapper;
 import cn.liuhaihua.web.model.WpComments;
 import cn.liuhaihua.web.service.WpCommentsService;
@@ -77,6 +78,14 @@ public class WpCommentsServiceImpl implements WpCommentsService {
 		example.setOrderByClause(" comment_date  DESC ");
 		Page<WpComments>  page =(Page<WpComments>) wpCommentsMapper.selectByExample(example);
 		return page.toPageInfo();
+	}
+	/** 
+	 * @param wpComments
+	 * @see cn.liuhaihua.web.service.WpCommentsService#insertComment(cn.liuhaihua.web.model.WpComments)
+	 */
+	@Override
+	public void insertComment(WpComments wpComments) throws ServiceException{
+			wpCommentsMapper.insert(wpComments);
 	}
 
 }

@@ -23,6 +23,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 
+import cn.liuhaihua.web.exception.ServiceException;
 import cn.liuhaihua.web.model.WpComments;
 import cn.liuhaihua.web.vo.CommentVO;
 
@@ -52,4 +53,11 @@ public interface WpCommentsService {
 	 * @return    参数
 	 */
 	public PageInfo<WpComments>  getCommentsByPostId(CommentVO commentVO);
+	
+	/**
+	 * @Title: insertComment
+	 * @Description: 留言更新操作
+	 * @param wpComments    参数
+	 */
+	public  void  insertComment(WpComments wpComments)  throws ServiceException;
 }

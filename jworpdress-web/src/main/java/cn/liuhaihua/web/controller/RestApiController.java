@@ -22,11 +22,13 @@ package cn.liuhaihua.web.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
 
+import cn.liuhaihua.web.exception.ServiceException;
 import cn.liuhaihua.web.model.WpComments;
 import cn.liuhaihua.web.service.WpCommentsService;
 import cn.liuhaihua.web.util.RedisConstant;
@@ -66,6 +68,22 @@ public class RestApiController extends BaseController{
 			return  new ResponseVO<PageInfo<WpComments>>(ResponseStatus.ERROR,null);
 		}
     
-    }                   
+    }
+    /**
+     * @Title: comment
+     * @Description: 评论方法
+     * @param wpComments
+     * @return    参数
+     */
+    @PostMapping("/comment")
+    public ResponseVO<String> comment(WpComments wpComments) {
+        try {
+        	wpCommentsService.insertComment(wpComments);
+        	return new ResponseVO<String>(ResponseStatus.SUCCESS,"评论发表成功，系统正在审核，请稍后刷新页面查看！");
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            return new ResponseVO<String>(ResponseStatus.ERROR,e.getMessage());
+        }
+    }
 
 }
