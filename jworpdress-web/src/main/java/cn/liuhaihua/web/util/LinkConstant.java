@@ -17,24 +17,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web.service;
-
-import java.util.List;
-
-import cn.liuhaihua.web.model.WpLinks;
+package cn.liuhaihua.web.util;
 
 /**
- * @ClassName: WpLinksService
- * @Description: 链接service
+ * @ClassName: LinkConstant
+ * @Description: 链接常量类
  * @author Liuhaihua
  * @date 2018年11月16日
  *
  */
-public interface WpLinksService {
+public class LinkConstant {
 	/**
-	 * @Title: getLinks
-	 * @Description: 获取博客的链接地址
-	 * @return    参数
+	 * 链接朋友关系
 	 */
-	public List<WpLinks>  getLinks(String linkrel);
+	public static String LINK_REL_FRIEND ="friend";
 }

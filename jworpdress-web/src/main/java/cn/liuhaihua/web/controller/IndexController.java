@@ -34,6 +34,7 @@ import com.github.pagehelper.PageInfo;
 import cn.liuhaihua.web.model.WpLinks;
 import cn.liuhaihua.web.service.WpLinksService;
 import cn.liuhaihua.web.service.WpPostsService;
+import cn.liuhaihua.web.util.LinkConstant;
 import cn.liuhaihua.web.util.TemplateConstant;
 import cn.liuhaihua.web.util.TermsConstants;
 import cn.liuhaihua.web.vo.PostParam;
@@ -50,8 +51,6 @@ public class IndexController extends BaseController{
 	
 	@Autowired
 	private WpPostsService wpPostsService;
-	@Autowired
-	private WpLinksService wpLinksService;
 	/**
      * 首页
      * @param vo
@@ -65,6 +64,8 @@ public class IndexController extends BaseController{
         PageInfo<PostVO>  page = wpPostsService.getPostListByPage(postParam);
         model.addAttribute("page", page);
         model.addAttribute("url", "index");
+    	List<WpLinks>   indexLinkList = wpLinksService.getLinks(LinkConstant.LINK_REL_FRIEND);
+    	model.addAttribute("indexLinkList", indexLinkList);
         return  new ModelAndView(TemplateConstant.INDEX_URL);
     }
 	/**
@@ -87,7 +88,7 @@ public class IndexController extends BaseController{
 	@RequestMapping("/links")
     public ModelAndView links(Model model) {
     	super.loadConfig(model);
-    	List<WpLinks>   linkList = wpLinksService.getLinks();
+    	List<WpLinks>   linkList = wpLinksService.getLinks(null);
     	model.addAttribute("linkList", linkList);
         return  new ModelAndView(TemplateConstant.LINKS);
     }

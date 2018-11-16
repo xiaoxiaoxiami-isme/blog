@@ -21,12 +21,16 @@ package cn.liuhaihua.web.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.liuhaihua.web.mapper.WpLinksMapper;
 import cn.liuhaihua.web.model.WpLinks;
 import cn.liuhaihua.web.service.WpLinksService;
+import cn.liuhaihua.web.util.LinkConstant;
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.entity.Example.Criteria;
 
 /**
  * @ClassName: WpLinksServiceImpl
@@ -44,8 +48,15 @@ public class WpLinksServiceImpl implements WpLinksService {
 	 * @see cn.liuhaihua.web.service.WpLinksService#getLinks()
 	 */
 	@Override
-	public List<WpLinks> getLinks() {
-		return wpLinksMapper.selectAll();
+	public List<WpLinks> getLinks(String linkrel) {
+		if(StringUtils.isEmpty(linkrel) ){
+			return wpLinksMapper.selectAll();
+		}else{
+			Example   example =  new Example(WpLinks.class);
+			Criteria criteria = example.createCriteria();
+			criteria.andEqualTo("linkRel", LinkConstant.LINK_REL_FRIEND);
+			return wpLinksMapper.selectByExample(example);
+		}
 	}
 
 }

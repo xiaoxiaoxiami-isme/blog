@@ -19,12 +19,16 @@
  */
 package cn.liuhaihua.web.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.ui.Model;
 
+import cn.liuhaihua.web.model.WpLinks;
+import cn.liuhaihua.web.service.WpLinksService;
+import cn.liuhaihua.web.util.LinkConstant;
 import cn.liuhaihua.web.util.RedisConstant;
 import cn.liuhaihua.web.vo.SeoVO;
 import cn.liuhaihua.web.vo.WebConfig;
@@ -39,6 +43,8 @@ import cn.liuhaihua.web.vo.WebConfig;
 public class BaseController {
 	@Autowired
 	public RedisTemplate<String,Object> redisTemplate;
+	@Autowired
+	protected WpLinksService wpLinksService;
 	/**
 	 * @Title: loadConfig
 	 * @Description: 加载网站配置
