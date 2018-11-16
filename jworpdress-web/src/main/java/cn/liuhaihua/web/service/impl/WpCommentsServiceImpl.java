@@ -19,6 +19,7 @@
  */
 package cn.liuhaihua.web.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ import cn.liuhaihua.web.exception.ServiceException;
 import cn.liuhaihua.web.mapper.WpCommentsMapper;
 import cn.liuhaihua.web.model.WpComments;
 import cn.liuhaihua.web.service.WpCommentsService;
+import cn.liuhaihua.web.util.DateUtil;
 import cn.liuhaihua.web.vo.CommentVO;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
@@ -85,6 +87,12 @@ public class WpCommentsServiceImpl implements WpCommentsService {
 	 */
 	@Override
 	public void insertComment(WpComments wpComments) throws ServiceException{
+			wpComments.setCommentDate(new Date());
+			wpComments.setCommentDateGmt(DateUtil.getGMTDate());
+			wpComments.setCommentApproved("1");
+			wpComments.setCommentKarma(0);
+			wpComments.setCommentType("");
+			wpComments.setUserId(0l);
 			wpCommentsMapper.insert(wpComments);
 	}
 

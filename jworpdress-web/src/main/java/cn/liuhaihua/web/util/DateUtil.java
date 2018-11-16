@@ -19,12 +19,15 @@
  */
 package cn.liuhaihua.web.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @ClassName: DateUtil
@@ -88,7 +91,18 @@ public class DateUtil {
         }
         return dateStr;
     }
+    /**
+     * @Title: getGMTDate
+     * @Description: 获取gmt时间
+     * @return    参数
+     */
+    public static  Date  getGMTDate(){
+    	Calendar cd = Calendar.getInstance();
+    	SimpleDateFormat sdf = new SimpleDateFormat("EEE d MMM yyyy HH:mm:ss 'GMT'", Locale.US);
+    	sdf.setTimeZone(TimeZone.getTimeZone("GMT")); // 设置时区为GMT
+     	return cd.getTime();
 
+    }
     /**
      * 获取两个日期间隔的天数
      *

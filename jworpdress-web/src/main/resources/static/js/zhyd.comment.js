@@ -105,7 +105,7 @@ $(function(){
                         + '<h4 class="bottom-line"><i class="fa fa-commenting-o fa-fw icon"></i><strong>发表评论</strong>' + currentUser + '</h4>'
                         + '<div class="cancel-reply" id="cancel-reply" style="display: none;"><a href="javascript:void(0);" onclick="$.comment.cancelReply(this)" rel="external nofollow"><i class="fa fa-share"></i>取消回复</a></div>'
                         + '<form class="form-horizontal" role="form" id="comment-form">'
-                        + '<input type="hidden" name="commentPostId" id="comment-pid" value="0" size="22" tabindex="1">'
+                        + '<input type="hidden" name="commentParent" id="comment-pid" value="0" size="22" tabindex="1">'
                         + '<textarea id="comment_content" name="commentContent" style="display: none"></textarea>'
                         + '<div id="editor" style="width: 100%;height: 150px;"></div>'
                         + '<div style="position: absolute;right: 10px;bottom: 65px;font-size: 14px;font-weight: 700;color: #ececec;">HARRIES BLOG<br>http://www.liuhaihua.cn<br>讲文明、要和谐</div>'
@@ -165,7 +165,7 @@ $(function(){
                     url: "/api/comments",
                     data: {sid: sid, pageNumber: pageNumber || 1},
                     success: function (json) {                               
-                      //  $.tool.ajaxSuccess(json);
+                      // $.tool.ajaxSuccess(json);
                         // 加载 评论列表 start
                         var commentList = json.data.list;
                        // console.log(commentList);
@@ -180,7 +180,7 @@ $(function(){
                                     +'</div>'
                                     +'</div></li>';
                             // 加载 评论列表 end
-                            commentListBox += '</ul></div>';
+                         //   commentListBox += '</ul></div>';
                             $(commentListBox).appendTo(box);
                         }else{
                             // 首次加载-刷新页面后第一次加载，此时没有点击加载更多进行分页
@@ -198,7 +198,7 @@ $(function(){
                                 commentListBox += '<li>' +
                                         '    <div class="comment-body fade-in" id="comment-'+comment.commentId+'">' +
                                         '        <div class="cheader">' +
-                                        '           <div class="user-img"><img class="userImage" src="' + comment.commentKarma + '" onerror="this.src=\'' + appConfig.staticPath + '/img/user.png\'"></div>' +
+                                        '           <div class="user-img"><img class="userImage" src="" onerror="this.src=\'' + appConfig.staticPath + '/img/user.png\'"></div>' +
                                         '           <div class="user-info">' +
                                         '              <div class="nickname">' +
                                         '                 <a target="_blank" href="' +  comment.commentAuthorUrl + '" rel="external nofollow"><strong>' + comment.commentAuthor + '</strong></a>' +

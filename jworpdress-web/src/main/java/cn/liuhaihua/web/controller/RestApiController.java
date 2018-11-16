@@ -21,6 +21,8 @@ package cn.liuhaihua.web.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,7 @@ import cn.liuhaihua.web.exception.ServiceException;
 import cn.liuhaihua.web.model.WpComments;
 import cn.liuhaihua.web.service.WpCommentsService;
 import cn.liuhaihua.web.util.RedisConstant;
+import cn.liuhaihua.web.util.RequestUtil;
 import cn.liuhaihua.web.util.ResponseStatus;
 import cn.liuhaihua.web.vo.CommentVO;
 import cn.liuhaihua.web.vo.ResponseVO;
@@ -76,8 +79,10 @@ public class RestApiController extends BaseController{
      * @return    参数
      */
     @PostMapping("/comment")
-    public ResponseVO<String> comment(WpComments wpComments) {
+    public ResponseVO<String> comment(WpComments wpComments,HttpServletRequest request) {
         try {
+        	wpComments.setCommentAgent(RequestUtil.getUserAgent(request));
+        	wpComments.setCommentAuthorIp(RequestUtil.getClientIP(request));
         	wpCommentsService.insertComment(wpComments);
         	return new ResponseVO<String>(ResponseStatus.SUCCESS,"评论发表成功，系统正在审核，请稍后刷新页面查看！");
         } catch (ServiceException e) {
