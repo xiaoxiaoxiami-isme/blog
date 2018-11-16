@@ -61,6 +61,17 @@ public class IndexController extends BaseController{
         model.addAttribute("url", "index");
         return  new ModelAndView(TemplateConstant.INDEX_URL);
     }
+	/**
+	 * @Title: about
+	 * @Description: 关于作者
+	 * @param model
+	 * @return    参数
+	 */
+	@RequestMapping("/about")
+    public ModelAndView about(Model model) {
+    	super.loadConfig(model);
+        return  new ModelAndView(TemplateConstant.ABOUT);
+    }
     /**
      * 文章详情
      *

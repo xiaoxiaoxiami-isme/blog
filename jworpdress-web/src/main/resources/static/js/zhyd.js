@@ -141,7 +141,7 @@ function initScrollMenu() {
     }
 }
 var PaymentUtils = window.payment || {
-    config: [{url: appConfig.staticPath + '/img/alipay_nb.jpg', desc: '支付宝转账'},{url: appConfig.staticPath + '/img/wechat_nb.jpg', desc: '微信转账'}],
+    config: [{url: appConfig.staticPath + '/img/alipay.png', desc: '支付宝转账'},{url: appConfig.staticPath + '/img/weixin.png', desc: '微信转账'}],
     show : function () {
         $("#reward").modal('show');
         this.change(0);

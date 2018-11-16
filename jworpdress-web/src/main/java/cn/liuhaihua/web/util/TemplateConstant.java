@@ -39,5 +39,7 @@ public class TemplateConstant {
 	  * 404
 	  */
 	 public static final String ERROR_404 = "/error/404";
+	 
+	 public static final String  ABOUT= "about";
 }
 
