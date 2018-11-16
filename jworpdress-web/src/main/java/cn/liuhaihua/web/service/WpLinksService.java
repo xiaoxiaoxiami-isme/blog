@@ -17,36 +17,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web.util;
+package cn.liuhaihua.web.service;
+
+import java.util.List;
+
+import cn.liuhaihua.web.model.WpLinks;
 
 /**
- * @ClassName: Snippet
- * @Description: 模板常量类，一般为模板的名字
+ * @ClassName: WpLinksService
+ * @Description: 链接service
  * @author Liuhaihua
- * @date 2018年7月10日
+ * @date 2018年11月16日
  *
  */
-public class TemplateConstant {
+public interface WpLinksService {
 	/**
-	 * 首页模板名字
+	 * @Title: getLinks
+	 * @Description: 获取博客的链接地址
+	 * @return    参数
 	 */
-	 public static final String INDEX_URL = "index";
-	 /**
-	  * post
-	  */
-	 public static final String POST_URL = "post";
-	 /**
-	  * 404
-	  */
-	 public static final String ERROR_404 = "/error/404";
-	 /**
-	  * 关于我们
-	  */
-	 public static final String  ABOUT= "about";
-	 /**
-	  * 链接
-	  */
-	 public static final String  LINKS= "links";
-
+	public List<WpLinks>  getLinks();
 }
-

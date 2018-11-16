@@ -19,6 +19,8 @@
  */
 package cn.liuhaihua.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 
+import cn.liuhaihua.web.model.WpLinks;
+import cn.liuhaihua.web.service.WpLinksService;
 import cn.liuhaihua.web.service.WpPostsService;
 import cn.liuhaihua.web.util.TemplateConstant;
 import cn.liuhaihua.web.util.TermsConstants;
@@ -46,6 +50,8 @@ public class IndexController extends BaseController{
 	
 	@Autowired
 	private WpPostsService wpPostsService;
+	@Autowired
+	private WpLinksService wpLinksService;
 	/**
      * 首页
      * @param vo
@@ -71,6 +77,19 @@ public class IndexController extends BaseController{
     public ModelAndView about(Model model) {
     	super.loadConfig(model);
         return  new ModelAndView(TemplateConstant.ABOUT);
+    }
+	/**
+	 * @Title: links
+	 * @Description: 链接
+	 * @param model
+	 * @return    参数
+	 */
+	@RequestMapping("/links")
+    public ModelAndView links(Model model) {
+    	super.loadConfig(model);
+    	List<WpLinks>   linkList = wpLinksService.getLinks();
+    	model.addAttribute("linkList", linkList);
+        return  new ModelAndView(TemplateConstant.LINKS);
     }
     /**
      * 文章详情

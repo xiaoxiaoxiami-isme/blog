@@ -17,36 +17,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web.util;
+package cn.liuhaihua.web.mapper;
+
+import cn.liuhaihua.web.model.WpLinks;
 
 /**
- * @ClassName: Snippet
- * @Description: 模板常量类，一般为模板的名字
+ * @ClassName: WpLinksMapper
+ * @Description: 链接mapper
  * @author Liuhaihua
- * @date 2018年7月10日
+ * @date 2018年11月16日
  *
  */
-public class TemplateConstant {
-	/**
-	 * 首页模板名字
-	 */
-	 public static final String INDEX_URL = "index";
-	 /**
-	  * post
-	  */
-	 public static final String POST_URL = "post";
-	 /**
-	  * 404
-	  */
-	 public static final String ERROR_404 = "/error/404";
-	 /**
-	  * 关于我们
-	  */
-	 public static final String  ABOUT= "about";
-	 /**
-	  * 链接
-	  */
-	 public static final String  LINKS= "links";
+public interface WpLinksMapper  extends BaseMapper<WpLinks>{
 
 }
-

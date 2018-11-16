@@ -21,78 +21,77 @@ package cn.liuhaihua.web.model;
 
 import java.util.Date;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 /**
- * @ClassName: WpComments
- * @Description: 评论实体类
+ * @ClassName: WpLinks
+ * @Description: 链接实体类
  * @author Liuhaihua
- * @date 2018年8月25日
+ * @date 2018年11月16日
  *
  */
 @Data
-@Table(name = "wp_comments")
-public class WpComments {
+@Table(name = "wp_links")
+public class WpLinks {
 	/**
-	 * 评论ID
+	 * 链接ID
 	 */
-	private Long commentId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long  linkId;
 	/**
-	 * 文中ID
+	 * 链接url
 	 */
-	private Long commentPostId;
+	private  String linkUrl;
 	/**
-	 * 评论作者
+	 * 链接name
 	 */
-	private String commentAuthor;
+	private  String linkName;
 	/**
-	 * 评论人联系邮箱
+	 * 链接图片
 	 */
-	private String commentAuthorEmail;
+	private  String linkImage;
 	/**
-	 * 评论人网址
+	 * 链接打开方式
 	 */
-	private String commentAuthorUrl;
+	private  String linkTarget;
 	/**
-	 * 评论人IP
+	 * 链接rss
 	 */
-	private String commentAuthorIp;
+	private  String linkRss;
 	/**
-	 * 评论日期
+	 * 链接描述
 	 */
-	private Date  commentDate;
+	private  String linkDescription;
 	/**
-	 * 评论GMT日期
+	 * 链接是否可见
 	 */
-	private Date  commentDateGmt;
+	private  String linkVisible;
 	/**
-	 * 评论内容
+	 * 链接引用
 	 */
-	private String commentContent;
+	private  String linkRel;
 	/**
-	 * 评论的karma值
+	 * 链接备注
 	 */
-	private Integer  commentKarma;
+	private  String linkNotes;
 	/**
-	 * 评论许可（0，1，或'spam'）
+	 * 链接所有者
 	 */
-	private String   commentApproved;
+	private  Long  linkOwner;
 	/**
-	 * 评论代理（浏览器，操作系统等）
+	 * 链接分级
 	 */
-	private String  commentAgent;
+	private  Long  linkRating;
 	/**
-	 * 有意义的评论类型（pingback|trackback），常规评论类型时为空
+	 * 链接更新时间
 	 */
-	private String  commentType;
-	/**
-	 * 父评论的编号
-	 */
-	private Long   commentParent;
-	/**
-	 * 评论者登录后的用户编号（未登录则为0）
-	 */
-	private Long   userId;
+	private  Date linkUpdated;
+
+
 }

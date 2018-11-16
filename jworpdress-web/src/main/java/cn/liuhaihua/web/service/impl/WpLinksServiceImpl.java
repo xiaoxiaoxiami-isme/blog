@@ -17,36 +17,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.liuhaihua.web.util;
+package cn.liuhaihua.web.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cn.liuhaihua.web.mapper.WpLinksMapper;
+import cn.liuhaihua.web.model.WpLinks;
+import cn.liuhaihua.web.service.WpLinksService;
 
 /**
- * @ClassName: Snippet
- * @Description: 模板常量类，一般为模板的名字
+ * @ClassName: WpLinksServiceImpl
+ * @Description: 博客链接地址
  * @author Liuhaihua
- * @date 2018年7月10日
+ * @date 2018年11月16日
  *
  */
-public class TemplateConstant {
-	/**
-	 * 首页模板名字
+@Service
+public class WpLinksServiceImpl implements WpLinksService {
+	@Autowired
+	private WpLinksMapper  wpLinksMapper;
+	/** 
+	 * @return
+	 * @see cn.liuhaihua.web.service.WpLinksService#getLinks()
 	 */
-	 public static final String INDEX_URL = "index";
-	 /**
-	  * post
-	  */
-	 public static final String POST_URL = "post";
-	 /**
-	  * 404
-	  */
-	 public static final String ERROR_404 = "/error/404";
-	 /**
-	  * 关于我们
-	  */
-	 public static final String  ABOUT= "about";
-	 /**
-	  * 链接
-	  */
-	 public static final String  LINKS= "links";
+	@Override
+	public List<WpLinks> getLinks() {
+		return wpLinksMapper.selectAll();
+	}
 
 }
-
