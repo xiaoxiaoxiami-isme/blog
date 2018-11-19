@@ -134,9 +134,6 @@
 						<a href="${config.siteUrl}/img/javazaji.png" target="_blank" class="showImage" title="java杂记" rel="external nofollow">
 						<img data-original="${config.siteUrl}/img/javazaji.png" alt="java杂记" class="img-responsive img-rounded auto-shake lazy-img" style="width: 100px; display: inline-block;" src="${config.siteUrl}/img/javazaji.png">
 						</a>
-						<a href="${config.siteUrl}/img/leetcode.png" class="showImage" title="leetcode刷题旅程" rel="external nofollow">
-						<img data-original="${config.siteUrl}/img/leetcode.png" alt="leetcode刷题旅程" class="img-responsive img-rounded auto-shake lazy-img" style="width: 100px; display: inline-block;" src="${config.siteUrl}/img/leetcode.png">
-						</a>
 						</div>
 				</div>
         </div>
