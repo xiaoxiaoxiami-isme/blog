@@ -62,17 +62,17 @@
 			  </#list>
                <#--处理结果部分显示的逻辑--> 
 				<#if (page.navigateLastPage = page.pages-1)>
-			        		<li><a class="pointer" data-page="${page.pages}">${page.pages}</a></li>
+			        		<li><a class="pointer" data-page="${page.pages?c}">${page.pages?c}</a></li>
 			        <#elseif (page.navigateLastPage < page.pages-1)>
 			        		<li>...</li>
-			        		<li><a class="pointer" data-page="${page.pages}">${page.pages}</a></li>
+			        		<li><a class="pointer" data-page="${page.pages?c}">${page.pages?c}</a></li>
 			  </#if> 
  			 <#-- 是否下一页--> 
 			  <#if page.hasNextPage>
 			            <li><a class="pointer active" data-page="${page.nextPage}">下一页</i></a></li>
-			              <li><a class="pointer" data-page="${page.pages}">尾页</i></a></li>
+			              <li><a class="pointer" data-page="${page.pages?c}">尾页</i></a></li>
            		 </#if>
-               <li> 共 ${page.pages} 页 </li>
+               <li> 共 ${page.pages?c} 页 </li>
         </ul>
     </nav>
     </#if>
