@@ -32,7 +32,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 
 import cn.liuhaihua.web.model.WpLinks;
-import cn.liuhaihua.web.service.WpLinksService;
 import cn.liuhaihua.web.service.WpPostsService;
 import cn.liuhaihua.web.util.LinkConstant;
 import cn.liuhaihua.web.util.TemplateConstant;
@@ -58,9 +57,8 @@ public class IndexController extends BaseController{
      * @return
      */
 	@RequestMapping("/")
-    public ModelAndView home(Model model) {
+    public ModelAndView home(Model model,PostParam postParam) {
     	super.loadConfig(model);
-        PostParam postParam  =  new PostParam();  
         PageInfo<PostVO>  page = wpPostsService.getPostListByPage(postParam);
         model.addAttribute("page", page);
         model.addAttribute("url", "index");

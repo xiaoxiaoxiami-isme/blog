@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <form action="/" method="post" class="form-horizontal searchForm" id="searchForm">
-                    <input type="hidden" name="pageNumber" value="1">
+                    <input type="hidden" name="pageNum" value="1">
                     <div class="input-group bottom-line">
                         <input type="text" class="form-control br-none" name="keywords" required="required" placeholder="输入搜索内容">
                         <span class="input-group-btn">

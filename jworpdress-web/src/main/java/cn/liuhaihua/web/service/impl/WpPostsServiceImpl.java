@@ -74,6 +74,7 @@ public class WpPostsServiceImpl implements WpPostsService {
 	public PageInfo<PostVO> getPostListByPage(PostParam postParam) throws ServiceException {
 		int pageNum = postParam.getPageNum();// 起始页
 		int pageSize = postParam.getPageSize();// 每页显示条数
+		String keywords = postParam.getKeywords();//关键字
 		List<Long>  postIds =postParam.getPostIds();
 		if (pageNum <= 0){
 			pageNum = 1;
@@ -89,6 +90,13 @@ public class WpPostsServiceImpl implements WpPostsService {
 		criteria.andEqualTo("postStatus",PostConstant.POSTSTATUS_PUBLISH);
 		if(null!=postIds&&postIds.size()>0){
 			criteria.andIn("id", postIds);
+		}
+		if(StringUtils.isNotEmpty(keywords)){
+			/**
+			 * 1.通过es,查询出结果出来IDS
+			 * 2.然后通过IDS集合去查询具体的文章内容出来
+			 */
+			criteria.andLike("postContent", "%"+keywords+"%");
 		}
 		if(!StringUtils.isEmpty(postParam.getSortType())){
 			if(postParam.getSortType().equals(PostConstant.SORTTYPE_COMMMENT)){

@@ -50,4 +50,8 @@ public class PostParam {
 	 * 文章排序类型
 	 */
 	private String sortType;
+	/**
+	 * 模糊搜索关键字
+	 */
+	private String keywords;
 }
