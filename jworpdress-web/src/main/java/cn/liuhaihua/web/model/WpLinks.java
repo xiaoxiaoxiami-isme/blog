@@ -19,6 +19,7 @@
  */
 package cn.liuhaihua.web.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
@@ -37,7 +38,11 @@ import lombok.Data;
  */
 @Data
 @Table(name = "wp_links")
-public class WpLinks {
+public class WpLinks implements Serializable{
+	/**
+	 * @Fields field:
+	 */
+	private static final long serialVersionUID = 2713231535234632791L;
 	/**
 	 * 链接ID
 	 */

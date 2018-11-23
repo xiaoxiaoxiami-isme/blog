@@ -19,6 +19,7 @@
  */
 package cn.liuhaihua.web.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,11 @@ import lombok.Data;
  */
 @Data
 @Table(name = "wp_users")
-public class WpUsers {
+public class WpUsers implements Serializable{
+	/**
+	 * @Fields field:
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

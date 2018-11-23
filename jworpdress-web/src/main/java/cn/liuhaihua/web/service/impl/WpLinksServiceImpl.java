@@ -25,6 +25,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.liuhaihua.web.annotation.RedisCache;
 import cn.liuhaihua.web.mapper.WpLinksMapper;
 import cn.liuhaihua.web.model.WpLinks;
 import cn.liuhaihua.web.service.WpLinksService;
@@ -48,6 +49,7 @@ public class WpLinksServiceImpl implements WpLinksService {
 	 * @see cn.liuhaihua.web.service.WpLinksService#getLinks()
 	 */
 	@Override
+	@RedisCache
 	public List<WpLinks> getLinks(String linkrel) {
 		if(StringUtils.isEmpty(linkrel) ){
 			return wpLinksMapper.selectAll();

@@ -19,6 +19,7 @@
  */
 package cn.liuhaihua.web.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Table;
@@ -34,7 +35,11 @@ import lombok.Data;
  */
 @Data
 @Table(name = "wp_comments")
-public class WpComments {
+public class WpComments implements Serializable{
+	/**
+	 * @Fields field:
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 评论ID
 	 */
