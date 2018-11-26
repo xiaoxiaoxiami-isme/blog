@@ -21,6 +21,7 @@ package cn.liuhaihua.web.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import cn.liuhaihua.web.annotation.RedisCache;
 import cn.liuhaihua.web.exception.ServiceException;
 import cn.liuhaihua.web.mapper.WpCommentsMapper;
 import cn.liuhaihua.web.model.WpComments;
@@ -54,6 +56,7 @@ public class WpCommentsServiceImpl implements WpCommentsService {
 	 * @see cn.liuhaihua.web.service.WpCommentsService#getRecentComments()
 	 */
 	@Override
+	@RedisCache(expire=1l,unit=TimeUnit.DAYS)
 	public List<WpComments> getRecentComments(int pageSize) {
 		PageHelper.startPage(0, pageSize);
 		Example  example =  new Example(WpComments.class);
@@ -69,6 +72,7 @@ public class WpCommentsServiceImpl implements WpCommentsService {
 	 * @see cn.liuhaihua.web.service.WpCommentsService#getCommentsByPostId(java.lang.Long, int, int)
 	 */
 	@Override
+	@RedisCache(expire=1l,unit=TimeUnit.DAYS)
 	public PageInfo<WpComments> getCommentsByPostId(CommentVO commentVO) {
 		Long postId =commentVO.getSid();
         int pageSize=commentVO.getPageSize();

@@ -19,6 +19,7 @@
  */
 package cn.liuhaihua.web.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.Data;
@@ -31,7 +32,12 @@ import lombok.Data;
  *
  */
 @Data
-public class PostParam {
+public class PostParam implements Serializable{
+
+	/**
+	 * @Fields field:field:{todo}(用一句话描述这个变量表示什么)
+	 */
+	private static final long serialVersionUID = 1L;
 
 	//当前页
 	private int pageNum;

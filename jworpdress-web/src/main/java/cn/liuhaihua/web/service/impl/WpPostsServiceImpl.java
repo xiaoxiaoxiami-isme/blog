@@ -22,6 +22,7 @@ package cn.liuhaihua.web.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.RandomStringUtils;
@@ -37,6 +38,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import cn.liuhaihua.web.annotation.RedisCache;
 import cn.liuhaihua.web.config.CacheInit;
 import cn.liuhaihua.web.exception.ServiceException;
 import cn.liuhaihua.web.mapper.WpPostsMapper;
@@ -71,6 +73,7 @@ public class WpPostsServiceImpl implements WpPostsService {
 	 * @see cn.liuhaihua.web.service.WpPostsService#getPostListByPage(cn.liuhaihua.web.vo.PostParam)
 	 */
 	@Override
+	@RedisCache(expire=1l,unit=TimeUnit.DAYS)
 	public PageInfo<PostVO> getPostListByPage(PostParam postParam) throws ServiceException {
 		int pageNum = postParam.getPageNum();// 起始页
 		int pageSize = postParam.getPageSize();// 每页显示条数
@@ -163,6 +166,7 @@ public class WpPostsServiceImpl implements WpPostsService {
 	 * @see cn.liuhaihua.web.service.WpPostsService#getPostByID(java.lang.String)
 	 */
 	@Override
+	@RedisCache(expire=1l,unit=TimeUnit.DAYS)
 	public PostVO getPostByID(Long postId) throws ServiceException {
 		WpPosts  wpPosts = wpPostsMapper.selectByPrimaryKey(postId);
 		if(null!=wpPosts){
@@ -219,6 +223,7 @@ public class WpPostsServiceImpl implements WpPostsService {
 	 * @see cn.liuhaihua.web.service.WpPostsService#getRelatePost(java.lang.Long)
 	 */
 	@Override
+	@RedisCache(expire=1l,unit=TimeUnit.DAYS)
 	public List<WpPosts> getRelatePost(Long postId) throws ServiceException {
 		List<TermsVO>  termsList =	wpTermsMapper.queryTermListByObjectId(postId);
 		String  termsIds ="";
@@ -251,6 +256,7 @@ public class WpPostsServiceImpl implements WpPostsService {
 	 * @see cn.liuhaihua.web.service.WpPostsService#getTagListByPage(cn.liuhaihua.web.vo.PostParam)
 	 */
 	@Override
+	@RedisCache(expire=1l,unit=TimeUnit.DAYS)
 	public PageInfo<PostVO> getTermsListByPage(PostParam postParam) throws ServiceException {
 		List<Long>  postIds =wpTermsMapper.queryPostIdsByTermsId(postParam.getTermId(),postParam.getTaxonomy());
 		postParam.setPostIds(postIds);

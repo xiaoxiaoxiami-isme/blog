@@ -23,6 +23,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 /**
  * @ClassName: BaseVO
@@ -33,8 +34,12 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class BaseVO {
-    public final static int DEFAULT_PAGE_SIZE = 10;
+public class BaseVO implements Serializable{
+    /**
+	 * @Fields field:field:{todo}(用一句话描述这个变量表示什么)
+	 */
+	private static final long serialVersionUID = 1L;
+	public final static int DEFAULT_PAGE_SIZE = 10;
     private int pageNumber = 1;
     private int pageSize = 0;
     private int pageStart = 0;

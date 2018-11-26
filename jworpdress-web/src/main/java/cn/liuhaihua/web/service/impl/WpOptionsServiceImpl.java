@@ -23,10 +23,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.liuhaihua.web.annotation.RedisCache;
 import cn.liuhaihua.web.mapper.WpCommentsMapper;
 import cn.liuhaihua.web.mapper.WpOptionsMapper;
 import cn.liuhaihua.web.mapper.WpPostsMapper;
@@ -60,6 +62,7 @@ public class WpOptionsServiceImpl implements WpOptionsService {
 	 * @see cn.liuhaihua.web.service.WpOptionsService#autoloadConfig()
 	 */
 	@Override
+	@RedisCache(expire=1l,unit=TimeUnit.DAYS)
 	public List<WpOptions> autoloadConfig() {
 		Example example = new Example(WpOptions.class);
 		Criteria c = example.createCriteria();
@@ -73,6 +76,7 @@ public class WpOptionsServiceImpl implements WpOptionsService {
      * @return
      */
     @Override
+	@RedisCache(expire=1l,unit=TimeUnit.DAYS)
     public Map<String, Object> getSiteInfo() {
         Map<String, Object> map = new  HashMap<String, Object>();
         map.put("postCount", wpPostsMapper.selectCount(null));

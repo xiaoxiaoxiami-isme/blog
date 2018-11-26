@@ -21,11 +21,13 @@ package cn.liuhaihua.web.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.liuhaihua.web.annotation.RedisCache;
 import cn.liuhaihua.web.mapper.WpTermsMapper;
 import cn.liuhaihua.web.service.WpTermsService;
 import cn.liuhaihua.web.util.TermsConstants;
@@ -48,6 +50,7 @@ public class WpTermsServiceImpl implements WpTermsService {
 	 * @see cn.liuhaihua.web.service.WpTermsService#getTerms(java.lang.String)
 	 */
 	@Override
+	@RedisCache(expire=1l,unit=TimeUnit.DAYS)
 	public List<TermsVO> getTerms(String taxonomy) {
 		List<TermsVO>  list = wpTermsMapper.queryTermListByTaxonomy(taxonomy);
 		return list;
@@ -87,6 +90,7 @@ public class WpTermsServiceImpl implements WpTermsService {
 	 * @see cn.liuhaihua.web.service.WpTermsService#getNavigate()
 	 */
 	@Override
+	@RedisCache(expire=1l,unit=TimeUnit.DAYS)
 	public List<TermsVO> getNavigate() {
 		 List<TermsVO> list =this.getTerms(TermsConstants.category);
 		// 最后的结果

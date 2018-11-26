@@ -20,6 +20,7 @@
 package cn.liuhaihua.web.service.impl;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class WpLinksServiceImpl implements WpLinksService {
 	 * @see cn.liuhaihua.web.service.WpLinksService#getLinks()
 	 */
 	@Override
-	@RedisCache
+	@RedisCache(expire=1l,unit=TimeUnit.DAYS)
 	public List<WpLinks> getLinks(String linkrel) {
 		if(StringUtils.isEmpty(linkrel) ){
 			return wpLinksMapper.selectAll();
